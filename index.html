@@ -2,1467 +2,1531 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 <title>atti</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,100..900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --cream: #FDFAF5;
-  --teal: #1A5F6B;
-  --teal-dark: #1A3A42;
-  --amber: #D4883A;
-  --earth: #8B7355;
-  --terracotta: #B46450;
-  --dark: #1A1A2E;
-  --water: #4A90B8;
-  --air: #8A7F96;
-  --light-amber: #F5D89A;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family:'DM Sans',sans-serif;
-  background:#e8e8e8;
-  display:flex; justify-content:center; align-items:flex-start;
-  min-height:100vh; padding:12px 0;
-}
-.phone {
-  width:390px; height:844px; background:var(--cream);
-  border-radius:40px; box-shadow:0 20px 60px rgba(0,0,0,.15);
-  display:flex; flex-direction:column; overflow:hidden; position:relative;
-}
-@media(max-width:480px){
-  .phone{width:100%;height:100vh;height:100dvh;border-radius:0;box-shadow:none;}
-  body{background:var(--cream);padding:0;}
-}
+:root{--cream:#FDFAF5;--teal:#1A5F6B;--teal-dark:#1A3A42;--amber:#D4883A;--earth:#8B7355;--terra:#B46450;--dark:#1A1A2E;--water:#4A90B8;--air:#8A7F96}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#e8e8e8;display:flex;justify-content:center;min-height:100vh;padding:12px 0}
+.phone{width:390px;height:844px;background:var(--cream);border-radius:40px;box-shadow:0 20px 60px rgba(0,0,0,.15);display:flex;flex-direction:column;overflow:hidden;position:relative}
+@media(max-width:480px){.phone{width:100%;height:100dvh;border-radius:0;box-shadow:none}body{background:var(--cream);padding:0}}
+.serif{font-family:'DM Serif Display',serif;font-weight:400}
+.dz{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;padding:20px;flex-shrink:0}
+.dz-alt{background:var(--dark);color:#fff;padding:20px;flex-shrink:0}
+.lz{flex:1;overflow-y:auto;padding:20px;padding-bottom:110px;background:var(--cream)}
+.lz::-webkit-scrollbar{width:4px}.lz::-webkit-scrollbar-thumb{background:#d9d3c8;border-radius:2px}
+.card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:12px}
+.stitle{font-family:'DM Serif Display',serif;font-size:18px;color:var(--dark);margin-bottom:12px}
+.btn{width:100%;padding:14px;background:var(--teal);color:#fff;border:none;border-radius:12px;font-family:'DM Sans';font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn:active{transform:scale(.97);opacity:.9}
+.screen{display:none;flex-direction:column;height:100%}.screen.active{display:flex}
 
-/* ========== TYPOGRAPHY ========== */
-.serif { font-family:'DM Serif Display',serif; font-weight:400; }
-.sans { font-family:'DM Sans',sans-serif; }
+/* Onboarding */
+#onboarding{position:relative}
+.ob-step{display:none;flex-direction:column;height:100%}.ob-step.active{display:flex}
+.ob-aw{background:var(--dark);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.ob-aw canvas{position:absolute;top:0;left:0;width:100%;height:100%}
+.ob-aw .ct{position:relative;z-index:2;text-align:center}
+.ob-aw .logo{font-family:'DM Serif Display',serif;font-size:52px;color:#fff}
+.ob-aw .sub{color:rgba(255,255,255,.6);font-size:14px;margin-top:8px}
+.ob-aw .bg{margin-top:40px;padding:14px 48px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:12px;font-family:'DM Sans';font-size:14px;font-weight:600;cursor:pointer}
+.ob-glow{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(212,136,58,.4),transparent 70%);margin:0 auto 24px;animation:gp 3s ease-in-out infinite}
+@keyframes gp{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.15);opacity:1}}
+.ob-ct{flex:1;display:flex;flex-direction:column;padding:32px 24px 24px;background:var(--cream)}
+.ob-ct h2{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark);margin-bottom:6px}
+.ob-ct .sub{font-size:13px;color:var(--earth);margin-bottom:24px}
+.ob-dots{display:flex;gap:8px;justify-content:center;padding:16px 0 24px}
+.ob-dot{width:8px;height:8px;border-radius:50%;background:#d9d3c8;transition:all .3s}
+.ob-dot.active{background:var(--teal);width:24px;border-radius:4px}
+.arch-cards{display:flex;flex-direction:column;gap:12px;flex:1}
+.arch-card{display:flex;align-items:center;gap:16px;padding:16px;background:#fff;border-radius:16px;border:2px solid transparent;cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.arch-card.sel{border-color:var(--teal)}
+.arch-card .iw{width:48px;height:48px;border-radius:12px;background:#f0ede8;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.arch-card.sel .iw{background:var(--teal)}
+.arch-card.sel .iw svg path,.arch-card.sel .iw svg line,.arch-card.sel .iw svg circle{stroke:#fff}
+.arch-card h3{font-size:15px;font-weight:600;color:var(--dark)}
+.arch-card p{font-size:12px;color:var(--earth);margin-top:2px}
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1}
+.comp-card{background:#fff;border-radius:16px;padding:16px;text-align:center;border:2px solid transparent;cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.04);display:flex;flex-direction:column;align-items:center;gap:6px}
+.comp-card.sel{border-color:var(--teal);box-shadow:0 0 20px rgba(26,95,107,.15)}
+.comp-card .cn{font-family:'DM Serif Display',serif;font-size:18px}
+.comp-card .cq{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--earth)}
+.comp-card .cp{font-size:11px;color:var(--earth);font-style:italic;line-height:1.3}
+.ob-field{margin-bottom:16px}
+.ob-field label{font-size:13px;font-weight:600;color:var(--dark);display:block;margin-bottom:8px}
+.ob-field input,.ob-field select,.ob-field textarea{width:100%;padding:12px;border:1px solid #e0e0e0;border-radius:12px;font-family:'DM Sans';font-size:15px;color:var(--dark);background:#fff}
+.ob-field input:focus,.ob-field select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,95,107,.1)}
+.chip-group{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 16px;border-radius:20px;border:1px solid #e0e0e0;font-size:13px;cursor:pointer;transition:all .2s;background:#fff;color:var(--dark)}
+.chip.sel{background:var(--teal);color:#fff;border-color:var(--teal)}
+.ob-meet{background:var(--dark);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px;position:relative;overflow:hidden}
+.ob-meet canvas{position:absolute;top:0;left:0;width:100%;height:100%}
+.ob-meet .ct{position:relative;z-index:2}
+.ob-meet .rv{width:180px;height:180px;margin-bottom:24px;animation:rvIn 1.2s ease-out forwards}
+@keyframes rvIn{0%{opacity:0;transform:scale(.5);filter:blur(10px)}70%{opacity:1;transform:scale(1.05);filter:blur(0)}100%{opacity:1;transform:scale(1)}}
+.ob-meet h1{font-family:'DM Serif Display',serif;font-size:34px;color:#fff;margin-bottom:8px}
+.ob-meet .msg{color:rgba(255,255,255,.85);font-size:15px;margin-bottom:8px;line-height:1.5}
+.ob-meet .csay{color:rgba(255,255,255,.5);font-size:13px;font-style:italic;margin-bottom:32px}
 
-/* ========== SHARED LAYOUT ========== */
-.dark-zone {
-  background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);
-  color:#fff; padding:20px; flex-shrink:0;
-}
-.dark-zone-alt {
-  background:var(--dark); color:#fff; padding:20px; flex-shrink:0;
-}
-.light-zone {
-  flex:1; overflow-y:auto; padding:20px; padding-bottom:110px;
-  background:var(--cream);
-}
-.light-zone::-webkit-scrollbar{width:4px;}
-.light-zone::-webkit-scrollbar-thumb{background:#d9d3c8;border-radius:2px;}
+/* Tab bar */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;align-items:center;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;padding:8px 0}
+.tab svg{width:22px;height:22px;stroke:#bbb;fill:none;stroke-width:2;transition:all .2s}
+.tab-label{font-size:10px;color:#bbb;font-weight:500;transition:all .2s}
+.tab.active svg{stroke:var(--teal)}.tab.active .tab-label{color:var(--teal);font-weight:600}
 
-.card {
-  background:#fff; border-radius:16px; padding:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,.04); margin-bottom:12px;
-}
-.section-title {
-  font-family:'DM Serif Display',serif; font-size:18px; font-weight:400;
-  color:var(--dark); margin-bottom:12px;
-}
-.btn-teal {
-  width:100%; padding:14px; background:var(--teal); color:#fff; border:none;
-  border-radius:12px; font-family:'DM Sans'; font-size:14px; font-weight:600;
-  cursor:pointer; transition:all .2s;
-}
-.btn-teal:active{transform:scale(.97);opacity:.9;}
+/* Shield + FAB */
+.sit-btn{position:absolute;bottom:84px;right:16px;width:48px;height:48px;background:var(--dark);border-radius:50%;border:none;cursor:pointer;z-index:90;box-shadow:0 4px 12px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center}
+.sit-btn:active{transform:scale(.92)}
+.fab{position:absolute;bottom:84px;left:16px;width:52px;height:52px;background:var(--teal);border-radius:50%;border:none;cursor:pointer;z-index:90;box-shadow:0 4px 12px rgba(26,95,107,.3);display:flex;align-items:center;justify-content:center}
+.fab svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:2}
 
-/* ========== SCREENS ========== */
-.screen { display:none; flex-direction:column; height:100%; }
-.screen.active { display:flex; }
+/* Home */
+#home .dz{text-align:center;padding-bottom:16px}
+.home-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.home-logo{font-family:'DM Serif Display',serif;font-size:18px}
+.greeting{font-size:14px;opacity:.85;margin-bottom:12px}
+.comp-display svg{animation:br 3.5s ease-in-out infinite}
+@keyframes br{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.counter-big{font-family:'DM Serif Display',serif;font-size:52px;line-height:1;margin-top:8px}
+.counter-label{font-size:14px;opacity:.7}
+.daily-card{border-left:4px solid var(--amber)}
+.daily-label{font-size:11px;color:var(--amber);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.daily-text{font-size:14px;color:var(--dark);margin-bottom:12px;line-height:1.4}
+.card-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.card-pair .card{margin-bottom:0}
+.card-pair .cl{font-size:11px;color:var(--earth);margin-bottom:4px}
+.card-pair .cv{font-family:'DM Serif Display',serif;font-size:22px;color:var(--dark)}
+.card-pair .cs{font-size:11px;color:var(--earth);margin-top:2px}
+.vbar{width:100%;height:6px;background:#e8e5dc;border-radius:3px;margin-top:8px;overflow:hidden}
+.vbar-fill{height:100%;background:var(--amber);border-radius:3px;transition:width .5s}
+.hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.hub-grid .card{margin-bottom:0;cursor:pointer}
+.hub-grid .card h3{font-family:'DM Serif Display',serif;font-size:15px;color:var(--dark);margin-bottom:4px}
+.comp-msg{background:linear-gradient(135deg,rgba(26,95,107,.06),rgba(212,136,58,.06));border-radius:16px;padding:16px}
 
-/* ========== ONBOARDING ========== */
-#onboarding { position:relative; }
-.ob-step { display:none; flex-direction:column; height:100%; }
-.ob-step.active { display:flex; }
+/* Metas */
+.sub-tabs{display:flex;gap:0;margin-top:12px}
+.sub-tab{flex:1;text-align:center;padding:8px 0;font-size:13px;font-weight:500;color:rgba(255,255,255,.5);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
+.sub-tab.active{color:#fff;border-bottom-color:#fff}
+.meta-item{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid #f0ede8}
+.meta-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--teal);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;margin-top:2px}
+.meta-check.done{background:var(--teal)}
+.badge{font-size:10px;padding:3px 8px;border-radius:8px;font-weight:500}
+.badge-w{background:rgba(139,115,85,.1);color:var(--earth)}
+.badge-a{background:rgba(212,136,58,.12);color:#C0884A}
+.badge-t{background:rgba(26,95,107,.1);color:var(--teal)}
+.badge-r{background:rgba(180,100,80,.12);color:var(--terra)}
+.pbar{width:100%;height:8px;background:#e8e5dc;border-radius:4px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));border-radius:4px}
 
-/* Step 1 - Awakening */
-.ob-awakening {
-  background:var(--dark); flex:1; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; position:relative; overflow:hidden;
-}
-.ob-awakening canvas { position:absolute; top:0; left:0; width:100%; height:100%; }
-.ob-awakening .content { position:relative; z-index:2; text-align:center; }
-.ob-awakening .logo { font-family:'DM Serif Display',serif; font-size:52px; color:#fff; }
-.ob-awakening .sub { color:rgba(255,255,255,.6); font-size:14px; margin-top:8px; }
-.ob-awakening .btn-ghost {
-  margin-top:40px; padding:14px 48px; border:1px solid rgba(255,255,255,.3);
-  background:transparent; color:#fff; border-radius:12px; font-family:'DM Sans';
-  font-size:14px; font-weight:600; cursor:pointer; transition:all .3s;
-}
-.ob-awakening .btn-ghost:hover{background:rgba(255,255,255,.08);}
-.ob-glow {
-  width:120px; height:120px; border-radius:50%;
-  background:radial-gradient(circle,rgba(212,136,58,.4) 0%,transparent 70%);
-  margin:0 auto 24px; animation:glowPulse 3s ease-in-out infinite;
-}
-@keyframes glowPulse {
-  0%,100%{transform:scale(1);opacity:.7;}
-  50%{transform:scale(1.15);opacity:1;}
-}
+/* Diario */
+.mood-row{display:flex;justify-content:space-between;gap:6px;margin-bottom:16px}
+.mood-opt{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;cursor:pointer;padding:8px 4px;border-radius:12px;transition:all .2s}
+.mood-opt.sel{background:rgba(26,95,107,.08)}
+.mood-opt.sel .mwrap{border-color:var(--teal);transform:scale(1.1)}
+.mwrap{width:48px;height:48px;border-radius:50%;background:#f5f3ef;display:flex;align-items:center;justify-content:center;border:2px solid transparent;transition:all .2s}
+textarea.di{width:100%;height:110px;padding:12px;border:1px solid #e0e0e0;border-radius:12px;font-family:'DM Sans';font-size:15px;color:var(--dark);resize:none;background:#fff}
+textarea.di:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,95,107,.1)}
 
-/* Steps 2-5 layout */
-.ob-content {
-  flex:1; display:flex; flex-direction:column; padding:32px 24px 24px;
-  background:var(--cream);
-}
-.ob-content h2 { font-family:'DM Serif Display',serif; font-size:26px; color:var(--dark); margin-bottom:6px; }
-.ob-content .sub { font-size:13px; color:var(--earth); margin-bottom:24px; }
-.ob-dots {
-  display:flex; gap:8px; justify-content:center; padding:16px 0 24px;
-}
-.ob-dot {
-  width:8px; height:8px; border-radius:50%; background:#d9d3c8; transition:all .3s;
-}
-.ob-dot.active { background:var(--teal); width:24px; border-radius:4px; }
+/* Jardin */
+.friend-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.friend-card{background:#fff;border-radius:14px;padding:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.garden-card{border-left:4px solid var(--amber)}
+.garden-activity{background:rgba(212,136,58,.06);border-radius:10px;padding:12px;margin-bottom:10px}
+.week-dots{display:flex;gap:8px;justify-content:center;margin-bottom:10px}
+.wd{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600}
+.wd-done{background:var(--teal);color:#fff}.wd-today{background:var(--amber);color:#fff}.wd-future{background:#e8e5dc;color:#bbb}
+.garden-q{background:rgba(26,95,107,.06);border-radius:10px;padding:12px}
+.invite-card{background:transparent;border:2px dashed #d9d3c8;border-radius:14px;padding:12px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:120px}
 
-/* Archetype cards */
-.arch-cards { display:flex; flex-direction:column; gap:12px; flex:1; }
-.arch-card {
-  display:flex; align-items:center; gap:16px; padding:16px;
-  background:#fff; border-radius:16px; border:2px solid transparent;
-  cursor:pointer; transition:all .2s;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
-}
-.arch-card.selected { border-color:var(--teal); }
-.arch-card .icon-wrap {
-  width:48px; height:48px; border-radius:12px; background:#f0ede8;
-  display:flex; align-items:center; justify-content:center; flex-shrink:0;
-  transition:all .2s;
-}
-.arch-card.selected .icon-wrap { background:var(--teal); }
-.arch-card.selected .icon-wrap svg path,
-.arch-card.selected .icon-wrap svg line,
-.arch-card.selected .icon-wrap svg circle { stroke:#fff; }
-.arch-card h3 { font-size:15px; font-weight:600; color:var(--dark); }
-.arch-card p { font-size:12px; color:var(--earth); margin-top:2px; }
+/* Evolucion */
+.evo-hero{display:flex;gap:14px;margin-bottom:14px}
+.evo-av{width:72px;height:72px;border-radius:14px;flex-shrink:0;background:linear-gradient(135deg,var(--amber),var(--earth));display:flex;align-items:center;justify-content:center}
+.streak-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.streak-box{background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.streak-num{font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.stat-card{background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.stat-num{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark)}
+.stat-lbl{font-size:11px;color:var(--earth)}
+.stat-det{font-size:10px;color:var(--teal);margin-top:2px}
+.evo-visual{background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:16px}
+.evo-scroll{overflow-x:auto;padding-bottom:8px}
+.evo-tl{display:flex;align-items:flex-end;min-width:640px;padding:0 4px;position:relative}
+.evo-tl::before{content:'';position:absolute;bottom:50px;left:4px;right:4px;height:2px;background:linear-gradient(to right,var(--teal) 33%,#d9d3c8 33%);z-index:1}
+.evo-st{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;z-index:2;min-width:72px}
+.evo-st.current svg{filter:drop-shadow(0 0 6px rgba(212,136,58,.5))}
+.evo-st.future svg{opacity:.22}
+.evo-st .edot{width:10px;height:10px;border-radius:50%;background:#d9d3c8;margin:6px 0}
+.evo-st.completed .edot{background:var(--teal)}
+.evo-st.current .edot{width:12px;height:12px;background:var(--amber);box-shadow:0 0 10px rgba(212,136,58,.6);animation:ep 2s ease-in-out infinite}
+@keyframes ep{0%,100%{box-shadow:0 0 8px rgba(212,136,58,.5)}50%{box-shadow:0 0 16px rgba(212,136,58,.8)}}
+.evo-st .en{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--dark);text-align:center}
+.evo-st.future .en{color:#c8c4ba}.evo-st.current .en{color:var(--amber)}
+.evo-st .ed{font-size:9px;color:var(--earth)}.evo-st.future .ed{color:#c8c4ba}
 
-/* Companion cards */
-.comp-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; flex:1; }
-.comp-card {
-  background:#fff; border-radius:16px; padding:16px; text-align:center;
-  border:2px solid transparent; cursor:pointer; transition:all .2s;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
-  display:flex; flex-direction:column; align-items:center; gap:6px;
-}
-.comp-card.selected { border-color:var(--teal); box-shadow:0 0 20px rgba(26,95,107,.15); }
-.comp-card .comp-svg { width:72px; height:72px; }
-.comp-card .comp-name { font-family:'DM Serif Display',serif; font-size:18px; }
-.comp-card .comp-quality { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--earth); }
-.comp-card .comp-phrase { font-size:11px; color:var(--earth); font-style:italic; line-height:1.3; }
+/* Overlays */
+.overlay{display:none;position:absolute;top:0;left:0;right:0;bottom:0;z-index:200;animation:fi .3s ease}
+.overlay.active{display:flex}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+.sit-ov{background:linear-gradient(180deg,var(--dark),#0d0d1a);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px}
+.sit-ov h2{font-family:'DM Serif Display',serif;font-size:24px;color:#fff;margin-bottom:24px}
+.breathe{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(26,95,107,.3),transparent 70%);margin:0 auto 20px;animation:bc 8s infinite;display:flex;align-items:center;justify-content:center}
+@keyframes bc{0%,100%{transform:scale(1);opacity:.6}30%{transform:scale(1.3);opacity:1}50%{transform:scale(1.3);opacity:1}80%{transform:scale(1);opacity:.6}}
+.sit-tools{display:flex;gap:16px;margin-bottom:32px}
+.sit-tool{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 20px;background:rgba(255,255,255,.06);border-radius:14px;border:1px solid rgba(255,255,255,.1);cursor:pointer;color:rgba(255,255,255,.7);font-size:11px}
+.sit-close{position:absolute;top:20px;right:20px;background:none;border:none;color:rgba(255,255,255,.5);font-size:28px;cursor:pointer}
 
-/* Step 4 dynamic */
-.ob-field { margin-bottom:16px; }
-.ob-field label { font-size:13px; font-weight:600; color:var(--dark); display:block; margin-bottom:8px; }
-.ob-field input, .ob-field select {
-  width:100%; padding:12px; border:1px solid #e0e0e0; border-radius:12px;
-  font-family:'DM Sans'; font-size:15px; color:var(--dark); background:#fff;
-}
-.ob-field input:focus, .ob-field select:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(26,95,107,.1); }
-.chip-group { display:flex; flex-wrap:wrap; gap:8px; }
-.chip {
-  padding:8px 16px; border-radius:20px; border:1px solid #e0e0e0;
-  font-size:13px; cursor:pointer; transition:all .2s; background:#fff;
-  color:var(--dark);
-}
-.chip.selected { background:var(--teal); color:#fff; border-color:var(--teal); }
+/* Create meta overlay */
+.create-ov{background:var(--cream);flex-direction:column;overflow-y:auto}
+.create-ov .hd{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;padding:20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.create-ov .hd h2{font-family:'DM Serif Display',serif;font-size:22px;flex:1}
+.create-ov .bd{padding:20px;flex:1}
+.create-step{display:none}.create-step.active{display:block}
 
-/* Step 6 - Meeting */
-.ob-meeting {
-  background:var(--dark); flex:1; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; text-align:center;
-  padding:32px; position:relative; overflow:hidden;
-}
-.ob-meeting canvas { position:absolute; top:0; left:0; width:100%; height:100%; }
-.ob-meeting .content { position:relative; z-index:2; }
-.ob-meeting .reveal-svg {
-  width:180px; height:180px; margin-bottom:24px;
-  animation:revealIn 1.2s ease-out forwards;
-}
-@keyframes revealIn {
-  0%{opacity:0;transform:scale(.5);filter:blur(10px);}
-  70%{opacity:1;transform:scale(1.05);filter:blur(0);}
-  100%{opacity:1;transform:scale(1);filter:blur(0);}
-}
-.ob-meeting h1 { font-family:'DM Serif Display',serif; font-size:34px; color:#fff; margin-bottom:8px; }
-.ob-meeting .msg { color:rgba(255,255,255,.85); font-size:15px; margin-bottom:8px; line-height:1.5; }
-.ob-meeting .companion-say { color:rgba(255,255,255,.5); font-size:13px; font-style:italic; margin-bottom:32px; }
-
-/* ========== TAB BAR ========== */
-.tab-bar {
-  position:absolute; bottom:0; left:0; right:0; height:72px;
-  background:#fff; border-top:1px solid #eee; display:flex;
-  justify-content:space-around; align-items:center; z-index:100;
-  padding-bottom:env(safe-area-inset-bottom);
-}
-.tab {
-  display:flex; flex-direction:column; align-items:center; gap:3px;
-  cursor:pointer; flex:1; padding:8px 0; transition:all .2s;
-}
-.tab svg { width:22px; height:22px; stroke:#bbb; fill:none; stroke-width:2; transition:all .2s; }
-.tab-label { font-size:10px; color:#bbb; font-weight:500; transition:all .2s; }
-.tab.active svg { stroke:var(--teal); }
-.tab.active .tab-label { color:var(--teal); font-weight:600; }
-
-/* ========== SITUACION BUTTON ========== */
-.sit-btn {
-  position:absolute; bottom:84px; right:16px; width:48px; height:48px;
-  background:var(--dark); border-radius:50%; border:none; cursor:pointer;
-  z-index:90; box-shadow:0 4px 12px rgba(0,0,0,.15);
-  display:flex; align-items:center; justify-content:center;
-  transition:transform .2s;
-}
-.sit-btn:active{transform:scale(.92);}
-.sit-btn svg { width:24px; height:24px; }
-
-/* ========== HOME ========== */
-#home .dark-zone { text-align:center; padding-bottom:16px; }
-.home-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
-.home-logo { font-family:'DM Serif Display',serif; font-size:18px; }
-.home-avatar {
-  width:36px; height:36px; border-radius:50%;
-  background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center;
-}
-.greeting { font-size:14px; opacity:.85; margin-bottom:12px; }
-.companion-display { margin:8px auto; }
-.companion-display svg { animation:breathing 3.5s ease-in-out infinite; }
-@keyframes breathing {
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.04);}
-}
-.companion-name-label { font-family:'DM Serif Display',serif; font-size:16px; margin-top:4px; }
-.counter-big { font-family:'DM Serif Display',serif; font-size:52px; line-height:1; margin-top:8px; }
-.counter-label { font-size:14px; opacity:.7; }
-
-/* Home cards */
-.daily-card { border-left:4px solid var(--amber); }
-.daily-card .daily-label { font-size:11px; color:var(--amber); font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
-.daily-card .daily-text { font-size:14px; color:var(--dark); margin-bottom:12px; line-height:1.4; }
-.daily-check {
-  display:flex; align-items:center; gap:10px; cursor:pointer;
-}
-.daily-check .circle {
-  width:24px; height:24px; border-radius:50%; border:2px solid var(--teal);
-  display:flex; align-items:center; justify-content:center; transition:all .3s;
-  flex-shrink:0;
-}
-.daily-check .circle.done { background:var(--teal); }
-.daily-check .circle.done svg { opacity:1; }
-.daily-check .circle svg { opacity:0; transition:all .2s; }
-.vitality-note { font-size:11px; color:var(--amber); margin-left:34px; margin-top:4px; opacity:0; transition:opacity .3s; }
-.vitality-note.show { opacity:1; }
-
-.card-pair { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
-.card-pair .card { margin-bottom:0; }
-.card-pair .card-label { font-size:11px; color:var(--earth); margin-bottom:4px; }
-.card-pair .card-value { font-family:'DM Serif Display',serif; font-size:22px; color:var(--dark); }
-.card-pair .card-sub { font-size:11px; color:var(--earth); margin-top:2px; }
-.vitality-bar { width:100%; height:6px; background:#e8e5dc; border-radius:3px; margin-top:8px; overflow:hidden; }
-.vitality-bar-fill { height:100%; background:var(--amber); border-radius:3px; transition:width .5s; }
-.vitality-state { font-size:11px; margin-top:4px; }
-
-.hub-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
-.hub-grid .card { margin-bottom:0; cursor:pointer; }
-.hub-grid .card h3 { font-family:'DM Serif Display',serif; font-size:15px; color:var(--dark); margin-bottom:4px; }
-.hub-grid .card .pending { font-size:12px; color:var(--earth); margin-bottom:8px; }
-.hub-grid .card .link { font-size:12px; color:var(--teal); font-weight:600; }
-
-.companion-msg {
-  background:linear-gradient(135deg,rgba(26,95,107,.06) 0%,rgba(212,136,58,.06) 100%);
-  border-radius:16px; padding:16px;
-}
-.companion-msg .msg-text { font-family:'DM Serif Display',serif; font-size:15px; font-style:italic; color:var(--dark); line-height:1.5; }
-.companion-msg .msg-sign { font-size:12px; color:var(--earth); text-align:right; margin-top:8px; }
-
-/* ========== TAREAS ========== */
-.sub-tabs { display:flex; gap:0; margin-top:12px; }
-.sub-tab {
-  flex:1; text-align:center; padding:8px 0; font-size:13px; font-weight:500;
-  color:rgba(255,255,255,.5); cursor:pointer; border-bottom:2px solid transparent;
-  transition:all .2s;
-}
-.sub-tab.active { color:#fff; border-bottom-color:#fff; }
-
-.task-item {
-  display:flex; align-items:flex-start; gap:12px; padding:14px 0;
-  border-bottom:1px solid #f0ede8;
-}
-.task-check {
-  width:22px; height:22px; border-radius:50%; border:2px solid var(--teal);
-  flex-shrink:0; cursor:pointer; display:flex; align-items:center;
-  justify-content:center; transition:all .3s; margin-top:2px;
-}
-.task-check.done { background:var(--teal); }
-.task-info { flex:1; }
-.task-title { font-size:14px; color:var(--dark); font-weight:500; }
-.task-meta { font-size:11px; color:var(--earth); margin-top:3px; }
-.task-badges { display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; }
-.badge {
-  font-size:10px; padding:3px 8px; border-radius:8px; font-weight:500;
-}
-.badge-warm { background:rgba(139,115,85,.1); color:var(--earth); }
-.badge-amber { background:rgba(212,136,58,.12); color:#C0884A; }
-.badge-teal { background:rgba(26,95,107,.1); color:var(--teal); }
-.badge-terra { background:rgba(180,100,80,.12); color:var(--terracotta); }
-
-.invite-banner {
-  display:flex; align-items:center; gap:12px; padding:14px;
-  background:rgba(26,95,107,.06); border-radius:12px; cursor:pointer;
-  margin-bottom:12px;
-}
-.invite-banner svg { stroke:var(--teal); flex-shrink:0; }
-.invite-banner .invite-text { flex:1; font-size:13px; color:var(--teal); font-weight:500; }
-
-.fab-left {
-  position:absolute; bottom:84px; left:16px; width:52px; height:52px;
-  background:var(--teal); border-radius:50%; border:none; cursor:pointer;
-  z-index:90; box-shadow:0 4px 12px rgba(26,95,107,.3);
-  display:flex; align-items:center; justify-content:center;
-}
-.fab-left svg { width:24px; height:24px; stroke:#fff; fill:none; stroke-width:2; }
-
-/* ========== DIARIO ========== */
-.mood-row { display:flex; justify-content:space-between; gap:6px; margin-bottom:16px; }
-.mood-opt {
-  display:flex; flex-direction:column; align-items:center; gap:6px;
-  flex:1; cursor:pointer; transition:all .2s; padding:8px 4px; border-radius:12px;
-}
-.mood-opt.selected { background:rgba(26,95,107,.08); }
-.mood-opt.selected .mood-circle-wrap { transform:scale(1.1); }
-.mood-circle-wrap {
-  width:48px; height:48px; border-radius:50%; background:#f5f3ef;
-  display:flex; align-items:center; justify-content:center;
-  border:2px solid transparent; transition:all .2s;
-}
-.mood-opt.selected .mood-circle-wrap { border-color:var(--teal); }
-.mood-label { font-size:10px; color:#999; text-align:center; }
-
-textarea.diary-input {
-  width:100%; height:110px; padding:12px; border:1px solid #e0e0e0;
-  border-radius:12px; font-family:'DM Sans'; font-size:15px; color:var(--dark);
-  resize:none; background:#fff;
-}
-textarea.diary-input:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(26,95,107,.1); }
-.char-ct { text-align:right; font-size:11px; color:#999; margin-top:4px; }
-
-.insight-card { border-left:4px solid var(--teal); }
-.insight-label { font-size:11px; color:var(--teal); text-transform:uppercase; letter-spacing:.5px; font-weight:600; margin-bottom:6px; }
-.insight-text { font-family:'DM Serif Display',serif; font-size:14px; font-style:italic; color:var(--dark); line-height:1.5; }
-
-.entry-item {
-  display:flex; gap:10px; align-items:flex-start; padding:10px 0;
-  border-bottom:1px solid #f0ede8;
-}
-.entry-date { font-family:'DM Serif Display',serif; font-size:12px; color:var(--dark); min-width:36px; }
-.entry-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; margin-top:3px; }
-.dot-bien { background:var(--teal); }
-.dot-normal { background:var(--amber); }
-.dot-mal { background:var(--terracotta); }
-.entry-preview { font-size:12px; color:#888; flex:1; line-height:1.3; }
-
-.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:8px; }
-.cal-day {
-  aspect-ratio:1; display:flex; align-items:center; justify-content:center;
-  font-size:11px; color:#bbb; border-radius:6px; background:#f9f8f5; position:relative;
-}
-.cal-day .cal-dot {
-  width:6px; height:6px; border-radius:50%; position:absolute; bottom:3px;
-}
-
-/* ========== RETOS / JARDIN ========== */
-.my-comp-card {
-  display:flex; align-items:center; gap:12px; padding:14px;
-  background:#fff; border-radius:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);
-  margin-bottom:16px;
-}
-.friend-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
-.friend-card {
-  background:#fff; border-radius:14px; padding:12px; text-align:center;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
-}
-.friend-card .f-name { font-size:13px; font-weight:600; color:var(--dark); margin-top:6px; }
-.friend-card .f-comp { font-size:10px; color:var(--earth); }
-.friend-card .f-state { font-size:11px; margin-top:4px; }
-.friend-card .f-bar { width:100%; height:4px; background:#e8e5dc; border-radius:2px; margin-top:6px; overflow:hidden; }
-.friend-card .f-bar-fill { height:100%; border-radius:2px; }
-
-.invite-card {
-  background:transparent; border:2px dashed #d9d3c8; border-radius:14px;
-  padding:12px; text-align:center; cursor:pointer; display:flex;
-  flex-direction:column; align-items:center; justify-content:center; gap:6px;
-  min-height:120px;
-}
-
-.garden-card { border-left:4px solid var(--amber); }
-.garden-header { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
-.garden-header .g-type { font-size:11px; color:var(--earth); }
-.garden-header .g-week { font-size:10px; padding:2px 8px; background:rgba(212,136,58,.12); color:#C0884A; border-radius:8px; margin-left:auto; }
-.garden-activity {
-  background:rgba(212,136,58,.06); border-radius:10px; padding:12px; margin-bottom:10px;
-}
-.garden-activity h4 { font-family:'DM Serif Display',serif; font-size:15px; color:var(--dark); margin-bottom:4px; }
-.garden-activity p { font-size:12px; color:var(--earth); line-height:1.4; }
-.week-dots { display:flex; gap:8px; justify-content:center; margin-bottom:10px; }
-.week-dot {
-  width:28px; height:28px; border-radius:50%; display:flex; align-items:center;
-  justify-content:center; font-size:9px; font-weight:600;
-}
-.wd-done { background:var(--teal); color:#fff; }
-.wd-today { background:var(--amber); color:#fff; }
-.wd-future { background:#e8e5dc; color:#bbb; }
-.garden-question {
-  background:rgba(26,95,107,.06); border-radius:10px; padding:12px;
-}
-.garden-question .gq-label { font-size:10px; color:var(--teal); text-transform:uppercase; letter-spacing:.5px; font-weight:600; margin-bottom:4px; }
-.garden-question .gq-text { font-size:13px; color:var(--dark); font-style:italic; }
-
-.create-garden-btn {
-  width:100%; padding:14px; border:2px dashed #d9d3c8; border-radius:14px;
-  background:transparent; font-family:'DM Sans'; font-size:13px; color:var(--earth);
-  cursor:pointer; margin-bottom:16px; display:flex; align-items:center;
-  justify-content:center; gap:8px;
-}
-
-.reto-card { position:relative; }
-.reto-title { font-family:'DM Serif Display',serif; font-size:16px; color:var(--dark); margin-bottom:4px; }
-.reto-desc { font-size:12px; color:var(--earth); margin-bottom:10px; }
-.progress-bar { width:100%; height:8px; background:#e8e5dc; border-radius:4px; overflow:hidden; }
-.progress-fill { height:100%; background:linear-gradient(90deg,var(--teal),var(--amber)); border-radius:4px; }
-.reto-fraction { font-size:12px; color:var(--earth); margin-top:4px; text-align:right; }
-
-.ranking-item {
-  display:flex; align-items:center; gap:10px; padding:10px 0;
-  border-bottom:1px solid #f0ede8;
-}
-.ranking-item.me { border-left:3px solid var(--teal); padding-left:10px; }
-.rank-pos { font-family:'DM Serif Display',serif; font-size:16px; color:var(--dark); min-width:24px; }
-.rank-name { flex:1; font-size:13px; color:var(--dark); }
-.rank-bar { width:60px; height:4px; background:#e8e5dc; border-radius:2px; overflow:hidden; }
-.rank-bar-fill { height:100%; background:var(--teal); border-radius:2px; }
-.rank-val { font-size:11px; color:var(--earth); min-width:30px; text-align:right; }
-
-/* ========== EVOLUCION ========== */
-.evo-hero { display:flex; gap:14px; margin-bottom:14px; }
-.evo-avatar {
-  width:72px; height:72px; border-radius:14px; flex-shrink:0;
-  background:linear-gradient(135deg,var(--amber),var(--earth));
-  display:flex; align-items:center; justify-content:center;
-}
-.evo-info { flex:1; }
-.evo-name { font-family:'DM Serif Display',serif; font-size:22px; }
-.evo-stage-label { font-size:12px; opacity:.7; margin-bottom:2px; }
-.evo-stage-name { font-size:16px; font-weight:600; }
-.evo-next { font-size:11px; color:var(--amber); margin-top:2px; }
-
-.streak-boxes { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-.streak-box {
-  background:#fff; border-radius:12px; padding:10px; text-align:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.04);
-}
-.streak-num { font-family:'DM Serif Display',serif; font-size:20px; color:var(--dark); }
-.streak-lbl { font-size:10px; color:var(--earth); }
-
-.stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
-.stat-card { background:#fff; border-radius:14px; padding:14px; box-shadow:0 2px 6px rgba(0,0,0,.04); }
-.stat-num { font-family:'DM Serif Display',serif; font-size:26px; color:var(--dark); }
-.stat-lbl { font-size:11px; color:var(--earth); }
-.stat-detail { font-size:10px; color:var(--teal); margin-top:2px; }
-
-.evo-visual { background:#fff; border-radius:16px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,.04); margin-bottom:16px; }
-.evo-visual h3 { font-family:'DM Serif Display',serif; font-size:18px; color:var(--dark); text-align:center; margin-bottom:2px; }
-.evo-visual .evo-sub { font-size:12px; color:var(--earth); text-align:center; font-style:italic; margin-bottom:16px; }
-.evo-scroll { overflow-x:auto; padding-bottom:8px; }
-.evo-scroll::-webkit-scrollbar{height:3px;}
-.evo-scroll::-webkit-scrollbar-thumb{background:#d9d3c8;border-radius:2px;}
-.evo-timeline {
-  display:flex; align-items:flex-end; min-width:640px; padding:0 4px;
-  position:relative;
-}
-.evo-timeline::before {
-  content:''; position:absolute; bottom:50px; left:4px; right:4px;
-  height:2px; background:linear-gradient(to right,var(--teal) 33%,#d9d3c8 33%); z-index:1;
-}
-.evo-st {
-  flex:1; display:flex; flex-direction:column; align-items:center;
-  position:relative; z-index:2; min-width:72px;
-}
-.evo-st svg { margin-bottom:6px; transition:all .3s; }
-.evo-st.completed svg { opacity:1; }
-.evo-st.current svg { filter:drop-shadow(0 0 6px rgba(212,136,58,.5)); }
-.evo-st.future svg { opacity:.22; }
-.evo-st .edot {
-  width:10px; height:10px; border-radius:50%; background:#d9d3c8;
-  margin-bottom:6px; z-index:3;
-}
-.evo-st.completed .edot { background:var(--teal); }
-.evo-st.current .edot {
-  width:12px; height:12px; background:var(--amber);
-  box-shadow:0 0 10px rgba(212,136,58,.6);
-  animation:edotPulse 2s ease-in-out infinite;
-}
-@keyframes edotPulse {
-  0%,100%{box-shadow:0 0 8px rgba(212,136,58,.5);}
-  50%{box-shadow:0 0 16px rgba(212,136,58,.8);}
-}
-.evo-st .ename { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; color:var(--dark); text-align:center; }
-.evo-st.future .ename { color:#c8c4ba; }
-.evo-st.current .ename { color:var(--amber); }
-.evo-st .eday { font-size:9px; color:var(--earth); }
-.evo-st.future .eday { color:#c8c4ba; }
-.evo-footer { text-align:center; margin-top:12px; font-size:12px; color:var(--earth); font-style:italic; }
-
-.monthly-summary { margin-bottom:16px; }
-.prog-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-.prog-label { font-size:12px; color:var(--earth); min-width:65px; }
-.prog-bar { flex:1; height:6px; background:#e8e5dc; border-radius:3px; overflow:hidden; }
-.prog-bar-fill { height:100%; background:var(--teal); border-radius:3px; }
-.prog-frac { font-size:11px; color:var(--earth); min-width:32px; text-align:right; }
-
-/* ========== OVERLAYS ========== */
-.overlay {
-  display:none; position:absolute; top:0; left:0; right:0; bottom:0;
-  z-index:200; animation:fadeIn .3s ease;
-}
-.overlay.active { display:flex; }
-@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-
-.sit-overlay {
-  background:linear-gradient(180deg,var(--dark) 0%,#0d0d1a 100%);
-  flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; padding:32px;
-}
-.sit-overlay h2 { font-family:'DM Serif Display',serif; font-size:24px; color:#fff; margin-bottom:24px; }
-.breathing-circle {
-  width:140px; height:140px; border-radius:50%;
-  background:radial-gradient(circle,rgba(26,95,107,.3) 0%,transparent 70%);
-  margin:0 auto 20px; animation:breatheCircle 8s infinite;
-  display:flex; align-items:center; justify-content:center;
-}
-@keyframes breatheCircle {
-  0%,100%{transform:scale(1);opacity:.6;}
-  30%{transform:scale(1.3);opacity:1;}
-  50%{transform:scale(1.3);opacity:1;}
-  80%{transform:scale(1);opacity:.6;}
-}
-.breathing-text { font-size:16px; color:rgba(255,255,255,.7); font-style:italic; margin-bottom:32px; }
-.sit-tools { display:flex; gap:16px; margin-bottom:32px; }
-.sit-tool {
-  display:flex; flex-direction:column; align-items:center; gap:6px;
-  padding:14px 20px; background:rgba(255,255,255,.06); border-radius:14px;
-  border:1px solid rgba(255,255,255,.1); cursor:pointer; color:rgba(255,255,255,.7);
-  font-size:11px; transition:all .2s;
-}
-.sit-tool svg { width:24px; height:24px; stroke:rgba(255,255,255,.7); fill:none; }
-.sit-close {
-  position:absolute; top:20px; right:20px; background:none; border:none;
-  color:rgba(255,255,255,.5); font-size:28px; cursor:pointer;
-}
+/* Hito items */
+.hito-item{display:flex;align-items:center;gap:10px;padding:10px;background:#fff;border-radius:10px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.hito-item .hnum{font-family:'DM Serif Display',serif;font-size:14px;color:var(--teal);min-width:20px}
+.hito-item .htxt{flex:1;font-size:13px;color:var(--dark)}
+.hito-item .hdel{background:none;border:none;color:#ccc;cursor:pointer;font-size:18px}
+@keyframes celebIn{0%{opacity:0;transform:scale(.7)}100%{opacity:1;transform:scale(1)}}
+.celeb-anim{animation:celebIn .4s ease-out}
+.celeb-star{font-family:'DM Serif Display',serif;font-size:48px;color:var(--amber);margin-bottom:12px}
+.canjear-btn{display:inline-block;margin-top:16px;padding:12px 32px;background:linear-gradient(135deg,var(--amber),#C0884A);color:#fff;border:none;border-radius:12px;font-family:'DM Sans';font-size:14px;font-weight:600;cursor:pointer}
+.invite-code{font-family:'DM Serif Display',serif;font-size:28px;letter-spacing:4px;color:var(--teal);background:rgba(26,95,107,.06);padding:16px;border-radius:12px;margin:16px 0}
+.garden-type{padding:16px;background:#fff;border-radius:16px;border:2px solid transparent;cursor:pointer;transition:all .2s;margin-bottom:10px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.garden-type.sel{border-color:var(--teal)}
 </style>
 </head>
 <body>
 <div class="phone" id="app">
 
-  <!-- ==================== ONBOARDING ==================== -->
+  <!-- ONBOARDING -->
   <div class="screen active" id="onboarding">
-
-    <!-- STEP 1: Awakening -->
     <div class="ob-step active" id="ob1">
-      <div class="ob-awakening">
-        <canvas id="particleCanvas"></canvas>
-        <div class="content">
-          <div class="ob-glow"></div>
-          <div class="logo serif">atti</div>
-          <div class="sub">tu compañero de vida</div>
-          <button class="btn-ghost" onclick="obNext(2)">Comenzar</button>
-        </div>
-      </div>
+      <div class="ob-aw"><canvas id="pCanvas"></canvas><div class="ct"><div class="ob-glow"></div><div class="logo serif">atti</div><div class="sub">tu compannero de vida</div><button class="bg" onclick="obGo(2)">Comenzar</button></div></div>
     </div>
-
-    <!-- STEP 2: Name -->
     <div class="ob-step" id="ob2">
-      <div class="ob-content">
-        <div style="text-align:center;margin-bottom:20px;">
-          <div style="width:64px;height:64px;border-radius:50%;background:rgba(26,95,107,.1);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-          </div>
-        </div>
-        <h2>Como te llamas?</h2>
-        <p class="sub">No hace falta tu nombre real</p>
-        <div class="ob-field">
-          <input type="text" id="userName" placeholder="Tu nombre" maxlength="20" style="font-size:18px;text-align:center;">
-        </div>
-        <div style="flex:1;"></div>
-        <button class="btn-teal" onclick="saveName()">Siguiente</button>
+      <div class="ob-ct">
+        <div style="text-align:center;margin-bottom:20px"><div style="width:64px;height:64px;border-radius:50%;background:rgba(26,95,107,.1);margin:0 auto 16px;display:flex;align-items:center;justify-content:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div></div>
+        <h2>Como te llamas?</h2><p class="sub">No hace falta tu nombre real</p>
+        <div class="ob-field"><input type="text" id="userName" placeholder="Tu nombre" maxlength="20" style="font-size:18px;text-align:center"></div>
+        <div style="flex:1"></div>
+        <button class="btn" onclick="saveName()">Siguiente</button>
         <div class="ob-dots"><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
       </div>
     </div>
-
-    <!-- STEP 3: Archetype -->
     <div class="ob-step" id="ob3">
-      <div class="ob-content">
-        <h2>Que te trae aqui?</h2>
-        <p class="sub">Esto nos ayuda a personalizar tu camino</p>
-        <div class="arch-cards">
-          <div class="arch-card" onclick="selectArch(this,'dejar')">
-            <div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2.5"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></div>
-            <div><h3>Dejar algo</h3><p>Quiero soltar un habito o una etapa</p></div>
-          </div>
-          <div class="arch-card" onclick="selectArch(this,'construir')">
-            <div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            <div><h3>Construir algo</h3><p>Quiero crear un habito nuevo</p></div>
-          </div>
-          <div class="arch-card" onclick="selectArch(this,'lograr')">
-            <div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="var(--dark)"/></svg></div>
-            <div><h3>Lograr algo</h3><p>Tengo una meta concreta</p></div>
-          </div>
-        </div>
-        <div style="flex:1;"></div>
-        <button class="btn-teal" onclick="obNext(4)" id="btn-ob3" style="opacity:.4;pointer-events:none;">Siguiente</button>
+      <div class="ob-ct">
+        <h2>Que te trae aqui?</h2><p class="sub">Esto nos ayuda a personalizar tu camino</p>
+        <div class="arch-cards" id="archCards"></div>
+        <div style="flex:1"></div>
+        <button class="btn" onclick="obGo(4)" id="btn-ob3" style="opacity:.4;pointer-events:none">Siguiente</button>
         <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
       </div>
     </div>
-
-    <!-- STEP 4: Details (dynamic) -->
     <div class="ob-step" id="ob4">
-      <div class="ob-content">
-        <h2 id="ob4-title"></h2>
-        <p class="sub" id="ob4-sub"></p>
-        <div id="ob4-fields" style="flex:1;overflow-y:auto;"></div>
-        <button class="btn-teal" onclick="saveDetails()">Siguiente</button>
+      <div class="ob-ct">
+        <h2 id="ob4t"></h2><p class="sub" id="ob4s"></p>
+        <div id="ob4f" style="flex:1;overflow-y:auto"></div>
+        <button class="btn" onclick="saveDetails()">Siguiente</button>
         <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div><div class="ob-dot"></div></div>
       </div>
     </div>
-
-    <!-- STEP 5: Companion -->
     <div class="ob-step" id="ob5">
-      <div class="ob-content">
-        <h2>Elige tu compañero</h2>
-        <p class="sub">Te acompañara en cada paso de tu camino</p>
-        <div class="comp-grid">
-          <div class="comp-card" onclick="selectComp(this,'luma')">
-            <svg class="comp-svg" viewBox="0 0 72 72"><defs><linearGradient id="lg1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#D4883A"/><stop offset="100%" stop-color="#8B7355"/></linearGradient></defs><ellipse cx="36" cy="40" rx="14" ry="18" fill="url(#lg1)"/><ellipse cx="36" cy="35" rx="9" ry="12" fill="#E8A84C" opacity=".5"/><ellipse cx="36" cy="28" rx="5" ry="8" fill="#F5D89A" opacity=".4"/></svg>
-            <div class="comp-name serif" style="color:var(--amber);">Luma</div>
-            <div class="comp-quality">CALIDEZ</div>
-            <div class="comp-phrase">Empieza como una chispa. Se convierte en tu nova.</div>
-          </div>
-          <div class="comp-card" onclick="selectComp(this,'cala')">
-            <svg class="comp-svg" viewBox="0 0 72 72"><defs><linearGradient id="lg2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4A90B8"/><stop offset="100%" stop-color="#2C6D8A"/></linearGradient></defs><ellipse cx="36" cy="42" rx="13" ry="16" fill="url(#lg2)"/><ellipse cx="36" cy="36" rx="8" ry="10" fill="#7CB8D4" opacity=".4"/><path d="M36 18 Q40 28 36 36 Q32 28 36 18" fill="#A8D8EA" opacity=".5"/></svg>
-            <div class="comp-name serif" style="color:var(--water);">Cala</div>
-            <div class="comp-quality">CALMA</div>
-            <div class="comp-phrase">Empieza como una gota. Se convierte en tu horizonte.</div>
-          </div>
-          <div class="comp-card" onclick="selectComp(this,'sela')">
-            <svg class="comp-svg" viewBox="0 0 72 72"><defs><linearGradient id="lg3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8B7355"/><stop offset="100%" stop-color="#6B5A42"/></linearGradient></defs><ellipse cx="36" cy="44" rx="14" ry="12" fill="url(#lg3)"/><ellipse cx="36" cy="40" rx="10" ry="8" fill="#A89070" opacity=".5"/><path d="M36 24 Q38 30 37 34 L35 34 Q34 30 36 24" fill="#7A9A5A" opacity=".6"/><ellipse cx="38" cy="28" rx="4" ry="2" fill="#8CB86B" opacity=".4" transform="rotate(20 38 28)"/></svg>
-            <div class="comp-name serif" style="color:var(--earth);">Sela</div>
-            <div class="comp-quality">RAIZ</div>
-            <div class="comp-phrase">Empieza como una semilla. Se convierte en tu tierra.</div>
-          </div>
-          <div class="comp-card" onclick="selectComp(this,'ala')">
-            <svg class="comp-svg" viewBox="0 0 72 72"><defs><linearGradient id="lg4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8A7F96"/><stop offset="100%" stop-color="#6B6280"/></linearGradient></defs><ellipse cx="36" cy="38" rx="18" ry="10" fill="url(#lg4)" opacity=".5"/><ellipse cx="30" cy="36" rx="12" ry="7" fill="#9B92AB" opacity=".4"/><ellipse cx="42" cy="34" rx="10" ry="6" fill="#ADA3BD" opacity=".35"/><path d="M24 38 Q30 32 36 35 Q42 32 48 38" fill="none" stroke="#8A7F96" stroke-width=".8" opacity=".4"/></svg>
-            <div class="comp-name serif" style="color:var(--air);">Ala</div>
-            <div class="comp-quality">VUELO</div>
-            <div class="comp-phrase">Empieza como un suspiro. Se convierte en tu infinito.</div>
-          </div>
-        </div>
-        <div style="flex:1;min-height:8px;"></div>
-        <button class="btn-teal" onclick="obNext(6)" id="btn-ob5" style="opacity:.4;pointer-events:none;">Siguiente</button>
+      <div class="ob-ct">
+        <h2>Elige tu compannero</h2><p class="sub">Te acompannara en cada paso de tu camino</p>
+        <div class="comp-grid" id="compGrid"></div>
+        <div style="flex:1;min-height:8px"></div>
+        <button class="btn" onclick="obGo(6)" id="btn-ob5" style="opacity:.4;pointer-events:none">Siguiente</button>
         <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot active"></div></div>
       </div>
     </div>
-
-    <!-- STEP 6: Meeting -->
     <div class="ob-step" id="ob6">
-      <div class="ob-meeting">
-        <canvas id="orbCanvas"></canvas>
-        <div class="content">
-          <div id="meetingSvg" class="reveal-svg"></div>
-          <h1 id="meetingGreeting" class="serif"></h1>
-          <div class="msg" id="meetingMsg"></div>
-          <div class="companion-say" id="meetingSay"></div>
-          <button class="btn-teal" onclick="startApp()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);">Empezar mi camino</button>
-        </div>
-      </div>
+      <div class="ob-meet"><canvas id="orbCanvas"></canvas><div class="ct"><div id="meetSvg" class="rv"></div><h1 id="meetH" class="serif"></h1><div class="msg" id="meetMsg"></div><div class="csay" id="meetSay"></div><button class="btn" onclick="startApp()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3)">Empezar mi camino</button></div></div>
     </div>
   </div>
 
-  <!-- ==================== HOME ==================== -->
+  <!-- HOME -->
   <div class="screen" id="home">
-    <div class="dark-zone">
-      <div class="home-top">
-        <div class="home-logo serif">atti</div>
-        <div class="home-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div>
-      </div>
-      <div class="greeting" id="homeGreeting"></div>
-      <div class="companion-display" id="homeCompanion"></div>
-      <div class="companion-name-label" id="homeCompName"></div>
-      <div class="counter-big serif" id="homeCounter">0</div>
+    <div class="dz" style="text-align:center;padding-bottom:16px">
+      <div class="home-top"><div class="home-logo serif">atti</div><div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div></div>
+      <div class="greeting" id="hGreet"></div>
+      <div class="comp-display" id="hComp"></div>
+      <div class="serif" style="font-size:16px;margin-top:4px" id="hCName"></div>
+      <div class="counter-big serif" id="hCount">0</div>
       <div class="counter-label">dias</div>
     </div>
-    <div class="light-zone">
-      <div class="card daily-card" id="dailyCard">
-        <div class="daily-label">Tu 1% de hoy</div>
-        <div class="daily-text" id="dailyText"></div>
-        <div class="daily-check" onclick="completeDailyTask()">
-          <div class="circle" id="dailyCircle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <span style="font-size:13px;color:var(--dark);">Completar</span>
-        </div>
-        <div class="vitality-note" id="dailyVitNote">+0.15 vitalidad</div>
-      </div>
-
-      <div class="card-pair">
-        <div class="card" id="card1">
-          <div class="card-label" id="card1Label"></div>
-          <div class="card-value" id="card1Value"></div>
-          <div class="card-sub" id="card1Sub"></div>
-        </div>
-        <div class="card" id="card2">
-          <div class="card-label" id="card2Label"></div>
-          <div class="card-value" id="card2Value"></div>
-          <div class="vitality-state" id="card2State"></div>
-          <div class="vitality-bar"><div class="vitality-bar-fill" id="card2Bar"></div></div>
-        </div>
-      </div>
-
-      <div class="hub-grid">
-        <div class="card" onclick="goTab('tareas')">
-          <h3 class="serif">Tareas</h3>
-          <div class="pending">3 pendientes</div>
-          <div style="font-size:12px;color:var(--dark);margin-bottom:2px;">Meditar 10 min</div>
-          <div style="font-size:12px;color:var(--dark);margin-bottom:8px;">Leer 20 paginas</div>
-          <div class="link">Ver todas ></div>
-        </div>
-        <div class="card" onclick="goTab('retos')">
-          <h3 class="serif">Reto del mes</h3>
-          <div class="pending">Deportes</div>
-          <div class="progress-bar" style="margin:8px 0;"><div class="progress-fill" style="width:60%;"></div></div>
-          <div class="link">Ver reto ></div>
-        </div>
-      </div>
-
-      <div class="companion-msg">
-        <div class="msg-text" id="homeMsg"></div>
-        <div class="msg-sign" id="homeSign"></div>
-      </div>
-    </div>
-
-    <button class="sit-btn" onclick="openSituacion()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg>
-    </button>
+    <div class="lz" id="hBody"></div>
+    <button class="sit-btn" onclick="openSit()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg></button>
   </div>
 
-  <!-- ==================== TAREAS ==================== -->
-  <div class="screen" id="tareas">
-    <div class="dark-zone">
-      <h1 class="serif" style="font-size:28px;">Tareas</h1>
-      <div class="sub-tabs">
-        <div class="sub-tab active" onclick="switchTaskTab('personal',this)">Mis tareas</div>
-        <div class="sub-tab" onclick="switchTaskTab('shared',this)">Compartidas</div>
-      </div>
+  <!-- METAS -->
+  <div class="screen" id="metas">
+    <div class="dz">
+      <h1 class="serif" style="font-size:28px">Metas</h1>
+      <div class="sub-tabs"><div class="sub-tab active" onclick="switchMTab('objetivo',this)">Mi objetivo</div><div class="sub-tab" onclick="switchMTab('personal',this)">Mis metas</div><div class="sub-tab" onclick="switchMTab('shared',this)">Compartidas</div></div>
     </div>
-    <div class="light-zone">
-      <div id="taskPersonal">
-        <div class="section-title">Hoy</div>
-        <div id="taskList">
-          <div class="task-item"><div class="task-check" onclick="toggleTask(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="task-info"><div class="task-title">Meditar 10 minutos</div><div class="task-meta">1 de 3 esta semana</div><div class="task-badges"><span class="badge badge-warm">Diaria</span><span class="badge badge-amber">+0.08</span></div></div></div>
-          <div class="task-item"><div class="task-check" onclick="toggleTask(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="task-info"><div class="task-title">Leer 20 paginas</div><div class="task-meta">2 de 5 esta semana</div><div class="task-badges"><span class="badge badge-warm">Semanal</span><span class="badge badge-teal">Cafe especial</span></div></div></div>
-          <div class="task-item"><div class="task-check" onclick="toggleTask(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="task-info"><div class="task-title">Caminar 30 minutos</div><div class="task-meta">Hoy</div><div class="task-badges"><span class="badge badge-terra">Vence hoy</span><span class="badge badge-amber">+0.08</span></div></div></div>
-        </div>
-        <div class="section-title" style="margin-top:20px;">Recompensas ganadas</div>
-        <div class="card" style="background:linear-gradient(135deg,rgba(212,136,58,.06),rgba(26,95,107,.04));">
-          <div style="font-family:'DM Serif Display',serif;font-size:14px;color:var(--dark);margin-bottom:8px;">Has desbloqueado 2 recompensas</div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1M6 8H5a4 4 0 000 8h1"/><path d="M6 8h12v9a4 4 0 01-4 4h-4a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-            <span style="font-size:13px;color:var(--dark);">Cafe especial</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span style="font-size:13px;color:var(--dark);">Cena fuera</span>
-          </div>
-        </div>
-      </div>
-
-      <div id="taskShared" style="display:none;">
-        <div class="invite-banner" onclick="alert('Codigo: ATTI-7K2M\nComparte este codigo con tu amigo')">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg>
-          <div class="invite-text">Invitar amigo</div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>
-        <button class="btn-teal" style="margin-bottom:16px;" onclick="alert('Formulario: Seleccionar amigo + nombre tarea + repeticiones + fecha')">Nueva tarea compartida</button>
-        <div class="section-title">Tareas activas</div>
-        <div class="card" style="display:flex;gap:12px;align-items:flex-start;">
-          <svg width="36" height="36" viewBox="0 0 72 72"><ellipse cx="36" cy="42" rx="13" ry="16" fill="var(--water)" opacity=".6"/><ellipse cx="36" cy="36" rx="8" ry="10" fill="#7CB8D4" opacity=".3"/></svg>
-          <div style="flex:1;">
-            <div style="font-size:14px;font-weight:600;color:var(--dark);">Correr juntos</div>
-            <div style="font-size:11px;color:var(--earth);">Con Ana (Cala)</div>
-            <div class="progress-bar" style="margin:6px 0;"><div class="progress-fill" style="width:60%;background:linear-gradient(90deg,var(--water),var(--teal));"></div></div>
-            <div style="display:flex;justify-content:space-between;">
-              <span style="font-size:11px;color:var(--earth);">3/5</span>
-              <span class="badge badge-warm">Vie 14 feb</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <button class="fab-left" onclick="alert('Nueva tarea personal')">
-      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    </button>
-    <button class="sit-btn" onclick="openSituacion()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg>
-    </button>
+    <div class="lz" id="metasBody"></div>
+    <button class="fab" onclick="openCreateMeta()"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+    <button class="sit-btn" onclick="openSit()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg></button>
   </div>
 
-  <!-- ==================== DIARIO ==================== -->
+  <!-- DIARIO -->
   <div class="screen" id="diario">
-    <div class="dark-zone">
-      <h1 class="serif" style="font-size:32px;">Diario</h1>
-      <div style="font-size:13px;opacity:.8;">12 dias escribiendo</div>
-    </div>
-    <div class="light-zone">
-      <div class="card">
-        <div class="section-title" style="margin-bottom:14px;">Como te sientes hoy?</div>
-        <div class="mood-row">
-          <div class="mood-opt" onclick="selectMood(this,'muy_mal')">
-            <div class="mood-circle-wrap"><svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="4" fill="var(--terracotta)" opacity=".3"/><circle cx="14" cy="14" r="10" fill="none" stroke="var(--terracotta)" stroke-width="1" stroke-dasharray="2 4" opacity=".4"/></svg></div>
-            <div class="mood-label">Muy mal</div>
-          </div>
-          <div class="mood-opt" onclick="selectMood(this,'mal')">
-            <div class="mood-circle-wrap"><svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="6" fill="var(--terracotta)" opacity=".4"/><circle cx="14" cy="14" r="10" fill="none" stroke="var(--terracotta)" stroke-width="1" opacity=".3"/></svg></div>
-            <div class="mood-label">Mal</div>
-          </div>
-          <div class="mood-opt" onclick="selectMood(this,'normal')">
-            <div class="mood-circle-wrap"><svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="8" fill="var(--earth)" opacity=".35"/><circle cx="14" cy="14" r="10" fill="none" stroke="var(--earth)" stroke-width="1" opacity=".3"/></svg></div>
-            <div class="mood-label">Normal</div>
-          </div>
-          <div class="mood-opt" onclick="selectMood(this,'bien')">
-            <div class="mood-circle-wrap"><svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="9" fill="var(--teal)" opacity=".35"/><circle cx="14" cy="14" r="11" fill="none" stroke="var(--teal)" stroke-width="1" opacity=".3"/></svg></div>
-            <div class="mood-label">Bien</div>
-          </div>
-          <div class="mood-opt" onclick="selectMood(this,'muy_bien')">
-            <div class="mood-circle-wrap"><svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="10" fill="var(--teal)" opacity=".4"/><circle cx="14" cy="14" r="12" fill="none" stroke="var(--amber)" stroke-width="1" opacity=".35"/></svg></div>
-            <div class="mood-label">Muy bien</div>
-          </div>
-        </div>
-        <textarea class="diary-input" placeholder="Escribe lo que quieras..." oninput="updateCharCount()"></textarea>
-        <div class="char-ct"><span id="charCount">0</span>/500</div>
-        <button class="btn-teal" style="margin-top:10px;" onclick="saveDiary()">Guardar entrada</button>
-        <div style="text-align:center;margin-top:6px;font-size:11px;color:var(--amber);">+0.10 vitalidad</div>
-      </div>
-
-      <div class="card insight-card">
-        <div class="insight-label" id="insightLabel">Luma observa:</div>
-        <div class="insight-text">Esta semana has mencionado mucho a tu familia. Parece que son importantes para ti.</div>
-      </div>
-
-      <div class="section-title">Entradas recientes</div>
-      <div class="entry-item"><div class="entry-date serif">12/2</div><div class="entry-dot dot-bien"></div><div class="entry-preview">Hoy fue un buen dia. Sali a caminar por el parque y me senti en paz...</div></div>
-      <div class="entry-item"><div class="entry-date serif">11/2</div><div class="entry-dot dot-normal"></div><div class="entry-preview">Dia tranquilo. Trabaje bastante pero me siento productivo...</div></div>
-      <div class="entry-item"><div class="entry-date serif">10/2</div><div class="entry-dot dot-mal"></div><div class="entry-preview">Noche dificil. Tuve ganas de recaer pero llame a mi hermano...</div></div>
-
-      <div class="section-title" style="margin-top:16px;">Febrero 2025</div>
-      <div class="card">
-        <div class="cal-grid" id="calGrid"></div>
-        <div style="font-size:12px;color:var(--earth);padding:0 4px;">8 de 13 dias con entrada</div>
-      </div>
-    </div>
-    <button class="sit-btn" onclick="openSituacion()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg>
-    </button>
+    <div class="dz"><h1 class="serif" style="font-size:32px">Diario</h1><div style="font-size:13px;opacity:.8" id="diarioSub"></div></div>
+    <div class="lz" id="diarioBody"></div>
+    <button class="sit-btn" onclick="openSit()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg></button>
   </div>
 
-  <!-- ==================== RETOS / JARDIN ==================== -->
-  <div class="screen" id="retos">
-    <div class="dark-zone">
-      <h1 class="serif" style="font-size:32px;">Retos</h1>
-      <div style="font-size:13px;opacity:.8;">Tu jardin tiene 4 amigos</div>
-    </div>
-    <div class="light-zone">
-      <div class="my-comp-card" id="myCompCard"></div>
-
-      <div class="section-title">Tu jardin</div>
-      <div class="friend-grid" id="friendGrid"></div>
-
-      <div class="section-title">Mis jardines</div>
-      <div class="card garden-card">
-        <div class="garden-header">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-          <div><div style="font-weight:600;font-size:13px;color:var(--dark);">Jardin Familia</div><div class="g-type">Con Lucas (hijo)</div></div>
-          <div class="g-week">Semana 6</div>
-        </div>
-        <div class="garden-activity">
-          <h4 class="serif">Cocinar algo juntos</h4>
-          <p>Elijan una receta sencilla y preparenla juntos. No importa el resultado, importa el rato.</p>
-        </div>
-        <div class="week-dots">
-          <div class="week-dot wd-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="week-dot wd-done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="week-dot wd-today" style="font-size:8px;">X</div>
-          <div class="week-dot wd-future">J</div>
-          <div class="week-dot wd-future">V</div>
-          <div class="week-dot wd-future">S</div>
-          <div class="week-dot wd-future">D</div>
-        </div>
-        <div class="garden-question">
-          <div class="gq-label">Pregunta del dia para Lucas</div>
-          <div class="gq-text">Cual es tu recuerdo favorito de nosotros?</div>
-        </div>
-      </div>
-
-      <button class="create-garden-btn" onclick="alert('Opciones:\n1. Jardin Familia\n2. Jardin Pareja\n3. Jardin Amigos')">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--earth)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Crear jardin
-      </button>
-
-      <div class="section-title">Reto del mes</div>
-      <div class="card reto-card">
-        <div class="reto-title serif">Deportes</div>
-        <div class="reto-desc">15 actividades deportivas este mes</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
-        <div class="reto-fraction">9/15</div>
-      </div>
-
-      <div class="section-title" style="margin-top:16px;">Ranking</div>
-      <div class="card">
-        <div class="ranking-item"><div class="rank-pos serif">1</div><div class="rank-name">Maria</div><div class="rank-bar"><div class="rank-bar-fill" style="width:80%;"></div></div><div class="rank-val">12/15</div></div>
-        <div class="ranking-item me"><div class="rank-pos serif">2</div><div class="rank-name" id="rankName">Tu</div><div class="rank-bar"><div class="rank-bar-fill" style="width:60%;"></div></div><div class="rank-val">9/15</div></div>
-        <div class="ranking-item"><div class="rank-pos serif">3</div><div class="rank-name">Carlos</div><div class="rank-bar"><div class="rank-bar-fill" style="width:47%;"></div></div><div class="rank-val">7/15</div></div>
-        <div class="ranking-item"><div class="rank-pos serif">4</div><div class="rank-name">Ana</div><div class="rank-bar"><div class="rank-bar-fill" style="width:33%;"></div></div><div class="rank-val">5/15</div></div>
-      </div>
-
-      <div class="section-title" style="margin-top:16px;">Retos anteriores</div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0ede8;">
-          <span style="font-size:13px;color:var(--dark);">Lectura - Enero</span>
-          <span class="badge badge-teal">Completado</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0ede8;">
-          <span style="font-size:13px;color:var(--dark);">Meditacion - Diciembre</span>
-          <span class="badge badge-amber">11/15</span>
-        </div>
-      </div>
-    </div>
-    <button class="sit-btn" onclick="openSituacion()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg>
-    </button>
+  <!-- JARDIN -->
+  <div class="screen" id="jardin">
+    <div class="dz"><h1 class="serif" style="font-size:32px">Jardin</h1><div style="font-size:13px;opacity:.8" id="jardinSub"></div></div>
+    <div class="lz" id="jardinBody"></div>
+    <button class="sit-btn" onclick="openSit()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg></button>
   </div>
 
-  <!-- ==================== EVOLUCION ==================== -->
+  <!-- EVOLUCION -->
   <div class="screen" id="evolucion">
-    <div class="dark-zone-alt">
-      <div class="evo-hero">
-        <div class="evo-avatar" id="evoAvatar"></div>
-        <div class="evo-info">
-          <div class="evo-name" id="evoName"></div>
-          <div class="evo-stage-label" id="evoStageLabel"></div>
-          <div class="evo-stage-name" id="evoStageName"></div>
-          <div class="evo-next" id="evoNext"></div>
-        </div>
-      </div>
-      <div class="streak-boxes">
-        <div class="streak-box"><div class="streak-num serif" id="evoStreak">42</div><div class="streak-lbl">Racha actual</div></div>
-        <div class="streak-box"><div class="streak-num serif" id="evoMax">42</div><div class="streak-lbl">Racha maxima</div></div>
-        <div class="streak-box"><div class="streak-num serif" id="evoVit">82</div><div class="streak-lbl">Vitalidad</div><div class="vitality-bar" style="margin-top:6px;"><div class="vitality-bar-fill" id="evoVitBar" style="width:82%;"></div></div></div>
-      </div>
-    </div>
-    <div class="light-zone">
-      <div class="section-title">Tu progreso</div>
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-num serif">87</div><div class="stat-lbl">tareas completadas</div><div class="stat-detail">23 este mes</div></div>
-        <div class="stat-card"><div class="stat-num serif">34</div><div class="stat-lbl">entradas diario</div><div class="stat-detail">12 este mes</div></div>
-        <div class="stat-card"><div class="stat-num serif">5</div><div class="stat-lbl">situaciones superadas</div><div class="stat-detail">1 este mes</div></div>
-        <div class="stat-card" id="evoArchStat"><div class="stat-num serif">360€</div><div class="stat-lbl">ahorrado</div><div class="stat-detail">45€ este mes</div></div>
-      </div>
-
-      <div class="section-title">Vitalidad - ultimas 4 semanas</div>
-      <div class="card">
-        <svg width="100%" height="100" viewBox="0 0 300 100" preserveAspectRatio="xMidYMid meet">
-          <defs><linearGradient id="ag" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="var(--teal)" stop-opacity=".3"/><stop offset="100%" stop-color="var(--teal)" stop-opacity=".05"/></linearGradient></defs>
-          <path d="M20 70 L100 50 L200 45 L280 20 L280 95 L20 95Z" fill="url(#ag)"/>
-          <polyline points="20,70 100,50 200,45 280,20" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <circle cx="20" cy="70" r="3" fill="var(--teal)"/><circle cx="100" cy="50" r="3" fill="var(--teal)"/><circle cx="200" cy="45" r="3" fill="var(--teal)"/><circle cx="280" cy="20" r="4" fill="var(--amber)" stroke="var(--teal)" stroke-width="2"/>
-          <text x="20" y="92" font-size="10" fill="var(--earth)" text-anchor="middle">Sem 1</text><text x="100" y="92" font-size="10" fill="var(--earth)" text-anchor="middle">Sem 2</text><text x="200" y="92" font-size="10" fill="var(--earth)" text-anchor="middle">Sem 3</text><text x="280" y="92" font-size="10" fill="var(--earth)" text-anchor="middle">Sem 4</text>
-        </svg>
-      </div>
-
-      <div class="evo-visual">
-        <h3 id="evoVisualTitle"></h3>
-        <div class="evo-sub" id="evoVisualSub"></div>
-        <div class="evo-scroll">
-          <div class="evo-timeline" id="evoTimeline"></div>
-        </div>
-        <div class="evo-footer">8 etapas en 3 años. Cada dia cuenta.</div>
-      </div>
-
-      <div class="section-title">Resumen de febrero</div>
-      <div class="card monthly-summary">
-        <div class="prog-row"><div class="prog-label">Tareas</div><div class="prog-bar"><div class="prog-bar-fill" style="width:77%;"></div></div><div class="prog-frac">23/30</div></div>
-        <div class="prog-row"><div class="prog-label">Diario</div><div class="prog-bar"><div class="prog-bar-fill" style="width:92%;"></div></div><div class="prog-frac">12/13</div></div>
-        <div class="prog-row"><div class="prog-label">Retos</div><div class="prog-bar"><div class="prog-bar-fill" style="width:60%;"></div></div><div class="prog-frac">9/15</div></div>
-        <div class="prog-row"><div class="prog-label">1% diario</div><div class="prog-bar"><div class="prog-bar-fill" style="width:85%;"></div></div><div class="prog-frac">11/13</div></div>
-      </div>
-
-      <div class="companion-msg">
-        <div class="msg-text" id="evoMsg"></div>
-        <div class="msg-sign" id="evoSign"></div>
-      </div>
-    </div>
-    <button class="sit-btn" onclick="openSituacion()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg>
-    </button>
+    <div class="dz-alt" id="evoHead"></div>
+    <div class="lz" id="evoBody"></div>
+    <button class="sit-btn" onclick="openSit()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg></button>
   </div>
 
-  <!-- ==================== TAB BAR ==================== -->
-  <div class="tab-bar" id="tabBar" style="display:none;">
-    <div class="tab active" data-tab="home" onclick="goTab('home')">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <div class="tab-label">Inicio</div>
-    </div>
-    <div class="tab" data-tab="tareas" onclick="goTab('tareas')">
-      <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      <div class="tab-label">Tareas</div>
-    </div>
-    <div class="tab" data-tab="diario" onclick="goTab('diario')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <div class="tab-label">Diario</div>
-    </div>
-    <div class="tab" data-tab="retos" onclick="goTab('retos')">
-      <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      <div class="tab-label">Retos</div>
-    </div>
-    <div class="tab" data-tab="evolucion" onclick="goTab('evolucion')">
-      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      <div class="tab-label">Evolucion</div>
-    </div>
+  <!-- TAB BAR -->
+  <div class="tab-bar" id="tabBar" style="display:none">
+    <div class="tab active" data-tab="home" onclick="goTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><div class="tab-label">Inicio</div></div>
+    <div class="tab" data-tab="metas" onclick="goTab('metas')"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><div class="tab-label">Metas</div></div>
+    <div class="tab" data-tab="diario" onclick="goTab('diario')"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><div class="tab-label">Diario</div></div>
+    <div class="tab" data-tab="jardin" onclick="goTab('jardin')"><svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.24-9-5v-2c0-2.76 4.03-5 9-5s9 2.24 9 5v2c0 2.76-4.03 5-9 5z"/><path d="M12 10V2"/><path d="M8 6c0-2.21 1.79-4 4-4s4 1.79 4 4"/></svg><div class="tab-label">Jardin</div></div>
+    <div class="tab" data-tab="evolucion" onclick="goTab('evolucion')"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><div class="tab-label">Evolucion</div></div>
   </div>
 
-  <!-- ==================== SITUACION OVERLAY ==================== -->
-  <div class="overlay sit-overlay" id="sitOverlay">
-    <button class="sit-close" onclick="closeSituacion()">&times;</button>
+  <!-- SITUACION OVERLAY -->
+  <div class="overlay sit-ov" id="sitOv">
+    <button class="sit-close" onclick="closeSit()">&times;</button>
     <h2 class="serif">Estas aqui. Eso ya es mucho.</h2>
-    <div class="breathing-circle"><div class="breathing-inner" style="width:40px;height:40px;border-radius:50%;background:rgba(26,95,107,.4);"></div></div>
-    <div class="breathing-text" id="breathText">Inspira lentamente...</div>
+    <div class="breathe"><div style="width:40px;height:40px;border-radius:50%;background:rgba(26,95,107,.4)"></div></div>
+    <div id="breathTxt" style="font-size:16px;color:rgba(255,255,255,.7);font-style:italic;margin-bottom:32px">Inspira lentamente...</div>
     <div class="sit-tools">
-      <div class="sit-tool"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 018 0"/></svg>Respirar</div>
-      <div class="sit-tool"><svg viewBox="0 0 24 24"><path d="M11 4H4v14a2 2 0 002 2h12a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Escribir</div>
-      <div class="sit-tool"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Llamar</div>
+      <div class="sit-tool"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 018 0"/></svg>Respirar</div>
+      <div class="sit-tool"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"><path d="M11 4H4v14a2 2 0 002 2h12a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Escribir</div>
+      <div class="sit-tool"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Llamar</div>
     </div>
-    <button class="btn-teal" onclick="resolveSituacion()" style="max-width:280px;">Voy a enfrentarlo</button>
-    <div style="font-size:11px;color:var(--amber);margin-top:8px;">+0.20 vitalidad</div>
+    <button class="btn" onclick="resolveSit()" style="max-width:280px">Voy a enfrentarlo</button>
+    <div style="font-size:11px;color:var(--amber);margin-top:8px">+0.20 vitalidad</div>
+  </div>
+
+  <!-- CREATE META OVERLAY -->
+  <div class="overlay create-ov" id="createOv">
+    <div class="hd"><button onclick="closeCreateMeta()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer">&times;</button><h2>Nueva meta</h2></div>
+    <div class="bd" id="createBody"></div>
+  </div>
+
+  <!-- INVITE OVERLAY -->
+  <div class="overlay create-ov" id="inviteOv">
+    <div class="hd"><button onclick="closeInvite()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer">&times;</button><h2>Invitar amigo</h2></div>
+    <div class="bd" id="inviteBody"></div>
+  </div>
+
+  <!-- CREATE GARDEN OVERLAY -->
+  <div class="overlay create-ov" id="gardenOv">
+    <div class="hd"><button onclick="closeGarden()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer">&times;</button><h2>Crear jardin</h2></div>
+    <div class="bd" id="gardenBody"></div>
+  </div>
+
+  <!-- CELEBRATION OVERLAY -->
+  <div class="overlay" id="celebOv" style="background:rgba(0,0,0,.6);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px" onclick="closeCeleb()">
+    <div id="celebContent" onclick="event.stopPropagation()" style="background:#fff;border-radius:24px;padding:32px;max-width:320px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2)"></div>
   </div>
 
 </div>
 
 <script>
-// ==================== STATE ====================
-const state = {
-  name: '', arch: '', companion: '',
-  startDate: null, vitality: 50, streak: 42, maxStreak: 42,
-  stage: 3, // demo starts at stage 3
-  habit: '', lastDay: null, monthlySpend: 0,
-  buildHabit: '', frequency: '',
-  goal: '', measure: '', target: 0, currentProgress: 120, deadline: null
+// ===== STATE =====
+const S = {
+  name:'', arch:'', companion:'',
+  startDate:null, vitality:50, streak:0, maxStreak:0,
+  stage:3, habit:'', lastDay:null, monthlySpend:0,
+  buildHabit:'', frequency:'', freqNum:3, freqPeriod:'semana',
+  goal:'', measureType:'cantidad', measure:'', target:0, currentProgress:120,
+  hitos:[], deadline:null,
+  metas:[], _selectedMood:null, _breathInt:null,
+  premios:[
+    {name:'Cena especial',type:'ahorro',value:50,icon:'🍽',canjeado:false},
+    {name:'Compra capricho',type:'dias',value:30,icon:'🎁',canjeado:false},
+    {name:'Zapatillas nuevas',type:'metas',value:5,icon:'👟',canjeado:false},
+    {name:'Viaje fin de semana',type:'ahorro',value:500,icon:'✈',canjeado:false}
+  ],
+  dejarMode:'total', // 'total' or 'reducir'
+  reducirPct:50, // target reduction %
+  habitMetric:'euros', // 'euros','horas','cantidad'
+  habitBefore:0, // usage before (e.g., 4 horas, 200 euros)
+  habitNow:0, // current usage (self-reported)
+  habitUnit:'al mes' // display unit
 };
 
-const COMPANIONS = {
-  luma: { name:'Luma', color:'#D4883A', quality:'CALIDEZ', stages:['Chispa','Brasa','Llama','Hoguera','Faro','Sol','Estrella','Nova'], verb:'arde' },
-  cala: { name:'Cala', color:'#4A90B8', quality:'CALMA', stages:['Gota','Charco','Rio','Lago','Mar','Oceano','Marea','Horizonte'], verb:'fluye' },
-  sela: { name:'Sela', color:'#8B7355', quality:'RAIZ', stages:['Semilla','Brote','Planta','Arbol','Jardin','Bosque','Selva','Tierra'], verb:'crece' },
-  ala:  { name:'Ala', color:'#8A7F96', quality:'VUELO', stages:['Suspiro','Brisa','Viento','Tormenta','Altura','Cielo','Aurora','Infinito'], verb:'vuela' }
+// Habit -> metric mapping
+const habitMetrics={
+  'Alcohol':{metric:'euros',unit:'al mes',placeholder:'Euros al mes',label:'Cuanto gastabas al mes?',reducLabel:'Cuantas veces por semana consumias?',reducUnit:'veces/semana'},
+  'Tabaco':{metric:'euros',unit:'al mes',placeholder:'Euros al mes',label:'Cuanto gastabas al mes?',reducLabel:'Cuantos cigarrillos al dia?',reducUnit:'cigarrillos/dia'},
+  'Drogas':{metric:'euros',unit:'al mes',placeholder:'Euros al mes',label:'Cuanto gastabas al mes?',reducLabel:'Cuantas veces al mes consumias?',reducUnit:'veces/mes'},
+  'Redes sociales':{metric:'horas',unit:'al dia',placeholder:'Horas al dia',label:'Cuantas horas al dia usabas?',reducLabel:'Cuantas horas al dia usas?',reducUnit:'horas/dia'},
+  'Azucar':{metric:'cantidad',unit:'al dia',placeholder:'Porciones al dia',label:'Cuantas veces al dia consumias azucar?',reducLabel:'Cuantas veces al dia consumes?',reducUnit:'veces/dia'},
+  'Apostar':{metric:'euros',unit:'al mes',placeholder:'Euros al mes',label:'Cuanto gastabas al mes?',reducLabel:'Cuanto apostabas al mes?',reducUnit:'euros/mes'}
 };
-const STAGE_DAYS = [0,7,30,90,180,365,730,1095];
-const STAGE_LABELS = ['Dia 0','Dia 7','Dia 30','Dia 90','Dia 180','1 año','2 años','3 años'];
 
-// ==================== ONBOARDING ====================
-function obNext(step) {
-  document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('active'));
+const C = {
+  luma:{name:'Luma',color:'#D4883A',quality:'CALIDEZ',stages:['Chispa','Brasa','Llama','Hoguera','Faro','Sol','Estrella','Nova'],verb:'arde'},
+  cala:{name:'Cala',color:'#4A90B8',quality:'CALMA',stages:['Gota','Charco','Rio','Lago','Mar','Oceano','Marea','Horizonte'],verb:'fluye'},
+  sela:{name:'Sela',color:'#8B7355',quality:'RAIZ',stages:['Semilla','Brote','Planta','Arbol','Jardin','Bosque','Selva','Tierra'],verb:'crece'},
+  ala:{name:'Ala',color:'#8A7F96',quality:'VUELO',stages:['Suspiro','Brisa','Viento','Tormenta','Altura','Cielo','Aurora','Infinito'],verb:'vuela'}
+};
+const SDAYS=[0,7,30,90,180,365,730,1095];
+const SLABELS=['Dia 0','Dia 7','Dia 30','Dia 90','Dia 180','1 anno','2 annos','3 annos'];
+
+// Demo metas (reward-first) with timeframe: semana, mes, anno
+const demoMetas = [
+  {reward:'Cafe especial',rewardDetail:'Cafe de especialidad en Hola Coffee',action:'Leer 20 paginas',freq:'3 veces por semana',done:false,timeframe:'semana'},
+  {reward:'Brunch dominical',rewardDetail:'Brunch en Federal Cafe',action:'Correr 30 minutos',freq:'2 veces por semana',done:false,timeframe:'semana'},
+  {reward:'Noche de cine',rewardDetail:'Cine en Callao',action:'Meditar 10 minutos',freq:'Diario',done:false,timeframe:'semana'},
+  {reward:'Zapatillas nuevas',rewardDetail:'Nike Pegasus que llevo mirando',action:'Completar 20 sesiones de gym',freq:'5 veces por semana',done:false,timeframe:'mes'},
+  {reward:'Viaje a Lisboa',rewardDetail:'Fin de semana largo con vuelo incluido',action:'Ahorrar 100 euros al mes',freq:'1 vez por mes',done:false,timeframe:'anno'},
+  {reward:'Curso de cocina',rewardDetail:'Escuela Le Cordon Bleu Madrid',action:'Terminar el libro de recetas',freq:'2 veces por semana',done:false,timeframe:'mes'}
+];
+let metaFilter='semana';
+
+// ===== SVG HELPERS =====
+function svg(comp,sz){
+  const s=sz||72;
+  if(comp==='luma')return`<svg width="${s}" height="${s}" viewBox="0 0 72 72"><defs><linearGradient id="g1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#D4883A"/><stop offset="100%" stop-color="#8B7355"/></linearGradient></defs><ellipse cx="36" cy="40" rx="14" ry="18" fill="url(#g1)"/><ellipse cx="36" cy="35" rx="9" ry="12" fill="#E8A84C" opacity=".5"/><ellipse cx="36" cy="28" rx="5" ry="8" fill="#F5D89A" opacity=".4"/><path d="M36 14Q38 22 36 26Q34 22 36 14" fill="#FFF3E0" opacity=".5"/></svg>`;
+  if(comp==='cala')return`<svg width="${s}" height="${s}" viewBox="0 0 72 72"><defs><linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4A90B8"/><stop offset="100%" stop-color="#2C6D8A"/></linearGradient></defs><ellipse cx="36" cy="42" rx="13" ry="16" fill="url(#g2)"/><ellipse cx="36" cy="36" rx="8" ry="10" fill="#7CB8D4" opacity=".4"/><path d="M36 18Q40 28 36 36Q32 28 36 18" fill="#A8D8EA" opacity=".5"/></svg>`;
+  if(comp==='sela')return`<svg width="${s}" height="${s}" viewBox="0 0 72 72"><defs><linearGradient id="g3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8B7355"/><stop offset="100%" stop-color="#6B5A42"/></linearGradient></defs><ellipse cx="36" cy="44" rx="14" ry="12" fill="url(#g3)"/><ellipse cx="36" cy="40" rx="10" ry="8" fill="#A89070" opacity=".5"/><path d="M36 24Q38 30 37 34L35 34Q34 30 36 24" fill="#7A9A5A" opacity=".6"/><ellipse cx="38" cy="28" rx="4" ry="2" fill="#8CB86B" opacity=".4" transform="rotate(20 38 28)"/></svg>`;
+  return`<svg width="${s}" height="${s}" viewBox="0 0 72 72"><defs><linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8A7F96"/><stop offset="100%" stop-color="#6B6280"/></linearGradient></defs><ellipse cx="36" cy="38" rx="18" ry="10" fill="url(#g4)" opacity=".5"/><ellipse cx="30" cy="36" rx="12" ry="7" fill="#9B92AB" opacity=".4"/><ellipse cx="42" cy="34" rx="10" ry="6" fill="#ADA3BD" opacity=".35"/></svg>`;
+}
+function flameAt(i){
+  const sizes=[[20,24],[26,30],[34,40],[40,46],[46,54],[52,58],[58,64],[66,72]];
+  const[w,h]=sizes[i],cx=w/2,cy=h*.57,rx=w*.35,ry=h*.38;
+  return`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><defs><linearGradient id="ef${i}" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#D4883A"/><stop offset="100%" stop-color="#8B7355"/></linearGradient></defs><ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#ef${i})"/><ellipse cx="${cx}" cy="${cy*.9}" rx="${rx*.65}" ry="${ry*.7}" fill="#E8A84C" opacity=".45"/></svg>`;
+}
+function getDays(){
+  if(!S.startDate)return 0;
+  const ms=Date.now()-S.startDate.getTime();
+  if(isNaN(ms)||ms<0)return 0;
+  return Math.floor(ms/86400000);
+}
+function getSaved(){
+  if(S.arch!=='dejar'||!S.monthlySpend)return 0;
+  const days=getDays();
+  const factor=S.dejarMode==='reducir'?(S.reducirPct/100):1;
+  return Math.max(0,Math.round((S.monthlySpend/30)*days*factor));
+}
+function vit(){return Math.round(S.vitality)}
+function moodSvg(level,clr,r){
+  return`<svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="${r}" fill="${clr}" opacity=".35"/><circle cx="14" cy="14" r="${Math.min(r+2,13)}" fill="none" stroke="${clr}" stroke-width="1" opacity=".3"/></svg>`;
+}
+// Shield SVG used on all screens
+const shieldSvg='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke-width="2"/></svg>';
+const checkSvg='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+
+// ===== ONBOARDING =====
+function obGo(step){
+  document.querySelectorAll('.ob-step').forEach(s=>s.classList.remove('active'));
   document.getElementById('ob'+step).classList.add('active');
-  if (step === 4) renderStep4();
-  if (step === 6) renderStep6();
+  if(step===4)renderOb4();
+  if(step===6)renderOb6();
+}
+function saveName(){const v=document.getElementById('userName').value.trim();if(!v)return;S.name=v;obGo(3);}
+
+// Render archetype cards
+(function(){
+  const data=[
+    {id:'dejar',icon:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2.5"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>',t:'Dejar algo',p:'Quiero soltar un habito o una etapa'},
+    {id:'construir',icon:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',t:'Construir algo',p:'Quiero crear un habito nuevo'},
+    {id:'lograr',icon:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="var(--dark)"/></svg>',t:'Lograr algo',p:'Tengo una meta concreta'}
+  ];
+  let h='';data.forEach(d=>{h+=`<div class="arch-card" onclick="selArch(this,'${d.id}')"><div class="iw">${d.icon}</div><div><h3>${d.t}</h3><p>${d.p}</p></div></div>`;});
+  setTimeout(()=>document.getElementById('archCards').innerHTML=h,0);
+})();
+
+function selArch(el,a){
+  document.querySelectorAll('.arch-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');S.arch=a;
+  const b=document.getElementById('btn-ob3');b.style.opacity='1';b.style.pointerEvents='auto';
 }
 
-function saveName() {
-  const v = document.getElementById('userName').value.trim();
-  if (!v) return;
-  state.name = v;
-  obNext(3);
+// Render companion grid
+(function(){
+  const data=[
+    {id:'luma',clr:'var(--amber)',phrase:'Empieza como una chispa. Se convierte en tu nova.'},
+    {id:'cala',clr:'var(--water)',phrase:'Empieza como una gota. Se convierte en tu horizonte.'},
+    {id:'sela',clr:'var(--earth)',phrase:'Empieza como una semilla. Se convierte en tu tierra.'},
+    {id:'ala',clr:'var(--air)',phrase:'Empieza como un suspiro. Se convierte en tu infinito.'}
+  ];
+  let h='';data.forEach(d=>{
+    const c=C[d.id];
+    h+=`<div class="comp-card" onclick="selComp(this,'${d.id}')"><div style="width:72px;height:72px">${svg(d.id,72)}</div><div class="cn" style="color:${d.clr}">${c.name}</div><div class="cq">${c.quality}</div><div class="cp">${d.phrase}</div></div>`;
+  });
+  setTimeout(()=>document.getElementById('compGrid').innerHTML=h,0);
+})();
+
+function selComp(el,comp){
+  document.querySelectorAll('.comp-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');S.companion=comp;
+  const b=document.getElementById('btn-ob5');b.style.opacity='1';b.style.pointerEvents='auto';
 }
 
-function selectArch(el, arch) {
-  document.querySelectorAll('.arch-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  state.arch = arch;
-  const btn = document.getElementById('btn-ob3');
-  btn.style.opacity='1'; btn.style.pointerEvents='auto';
-}
-
-function renderStep4() {
-  const t = document.getElementById('ob4-title');
-  const s = document.getElementById('ob4-sub');
-  const f = document.getElementById('ob4-fields');
-  f.innerHTML = '';
-
-  if (state.arch === 'dejar') {
-    t.textContent = 'Que quieres dejar?';
-    s.textContent = 'No hay juicio. Solo honestidad.';
-    f.innerHTML = `
-      <div class="ob-field"><label>Elige uno</label><div class="chip-group"><div class="chip" onclick="pickChip(this,'habit')">Alcohol</div><div class="chip" onclick="pickChip(this,'habit')">Tabaco</div><div class="chip" onclick="pickChip(this,'habit')">Drogas</div><div class="chip" onclick="pickChip(this,'habit')">Otro habito</div></div></div>
-      <div class="ob-field"><label>Cuando fue tu ultimo dia?</label><input type="date" id="ob4LastDay"></div>
-      <div class="ob-field"><label>Cuanto gastabas al mes? (opcional)</label><input type="number" id="ob4Spend" placeholder="€ al mes"></div>`;
-  } else if (state.arch === 'construir') {
-    t.textContent = 'Que quieres construir?';
-    s.textContent = 'Cada gran habito empieza con un primer paso.';
-    f.innerHTML = `
-      <div class="ob-field"><label>Elige uno</label><div class="chip-group"><div class="chip" onclick="pickChip(this,'buildHabit')">Ejercicio</div><div class="chip" onclick="pickChip(this,'buildHabit')">Meditacion</div><div class="chip" onclick="pickChip(this,'buildHabit')">Lectura</div><div class="chip" onclick="pickChip(this,'buildHabit')">Alimentacion</div><div class="chip" onclick="pickChip(this,'buildHabit')">Otro</div></div></div>
-      <div class="ob-field"><label>Con que frecuencia?</label><select id="ob4Freq"><option value="">Selecciona...</option><option>Diario</option><option>3 veces por semana</option><option>Semanal</option></select></div>`;
+function renderOb4(){
+  const t=document.getElementById('ob4t'),s=document.getElementById('ob4s'),f=document.getElementById('ob4f');
+  if(S.arch==='dejar'){
+    t.textContent='Que quieres dejar?';s.textContent='No hay juicio. Solo honestidad.';
+    f.innerHTML=`<div class="ob-field"><label>Elige uno</label><div class="chip-group"><div class="chip" onclick="pickChip(this,'habit')">Alcohol</div><div class="chip" onclick="pickChip(this,'habit')">Tabaco</div><div class="chip" onclick="pickChip(this,'habit')">Drogas</div><div class="chip" onclick="pickChip(this,'habit')">Redes sociales</div><div class="chip" onclick="pickChip(this,'habit')">Azucar</div><div class="chip" onclick="pickChip(this,'habit')">Apostar</div><div class="chip" onclick="pickOtro(this,'habit')">Otro...</div></div><div id="otroHabit" style="display:none;margin-top:8px"><input type="text" id="ob4OtroHabit" placeholder="Escribe tu habito..." oninput="S.habit=this.value"></div></div>
+    <div class="ob-field"><label>Como?</label>
+      <div style="display:flex;gap:0;background:#f0ede8;border-radius:10px;padding:3px">
+        <div onclick="setDejarMode('total',this)" style="flex:1;text-align:center;padding:10px 8px;font-size:13px;font-weight:600;color:${S.dejarMode==='total'?'#fff':'var(--earth)'};background:${S.dejarMode==='total'?'var(--teal)':'transparent'};border-radius:8px;cursor:pointer;transition:all .2s">Dejarlo del todo</div>
+        <div onclick="setDejarMode('reducir',this)" style="flex:1;text-align:center;padding:10px 8px;font-size:13px;font-weight:600;color:${S.dejarMode==='reducir'?'#fff':'var(--earth)'};background:${S.dejarMode==='reducir'?'var(--teal)':'transparent'};border-radius:8px;cursor:pointer;transition:all .2s">Reducirlo un %</div>
+      </div>
+    </div>
+    <div id="dejarModeFields"></div>`;
+    setTimeout(()=>renderDejarFields(),10);
+  } else if(S.arch==='construir'){
+    t.textContent='Que quieres construir?';s.textContent='Cada gran habito empieza con un primer paso.';
+    f.innerHTML=`<div class="ob-field"><label>Elige uno</label><div class="chip-group"><div class="chip" onclick="pickChip(this,'buildHabit')">Ejercicio</div><div class="chip" onclick="pickChip(this,'buildHabit')">Meditacion</div><div class="chip" onclick="pickChip(this,'buildHabit')">Lectura</div><div class="chip" onclick="pickChip(this,'buildHabit')">Alimentacion</div><div class="chip" onclick="pickChip(this,'buildHabit')">Ahorro</div><div class="chip" onclick="pickChip(this,'buildHabit')">Idioma</div><div class="chip" onclick="pickChip(this,'buildHabit')">Escritura</div><div class="chip" onclick="pickOtro(this,'buildHabit')">Otro...</div></div><div id="otroBuildHabit" style="display:none;margin-top:8px"><input type="text" id="ob4OtroBuild" placeholder="Escribe tu habito..." oninput="S.buildHabit=this.value"></div></div>
+    <div class="ob-field"><label>Con que frecuencia?</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="number" id="ob4FreqN" value="3" min="1" max="30" style="width:60px;text-align:center">
+        <span style="font-size:14px;color:var(--earth)">veces por</span>
+        <select id="ob4FreqP" style="flex:1"><option value="semana">semana</option><option value="mes">mes</option><option value="dia">dia</option></select>
+      </div>
+    </div>`;
   } else {
-    t.textContent = 'Cual es tu meta?';
-    s.textContent = 'Vamos a hacerla medible.';
-    f.innerHTML = `
-      <div class="ob-field"><label>Describe tu meta</label><input type="text" id="ob4Goal" placeholder="Ej: Escribir un libro"></div>
-      <div class="ob-field"><label>Como lo medimos?</label><select id="ob4Measure"><option value="">Selecciona...</option><option value="paginas">Paginas escritas</option><option value="horas">Horas dedicadas</option><option value="euros">Euros ahorrados</option><option value="hitos">Hitos completados</option></select></div>
-      <div class="ob-field"><label>Cuanto quieres lograr?</label><input type="number" id="ob4Target" placeholder="Ej: 300"></div>
-      <div class="ob-field"><label>Para cuando?</label><input type="date" id="ob4Deadline"></div>`;
+    t.textContent='Cual es tu meta?';s.textContent='Vamos a hacerla medible.';
+    f.innerHTML=`<div class="ob-field"><label>Describe tu meta</label><input type="text" id="ob4Goal" placeholder="Ej: Escribir un libro, Crear un emprendimiento"></div>
+    <div class="ob-field"><label>Como lo medimos?</label>
+      <div class="chip-group"><div class="chip sel" onclick="setMeasureType('cantidad',this)">Por cantidad</div><div class="chip" onclick="setMeasureType('hitos',this)">Por hitos</div></div>
+    </div>
+    <div id="ob4MeasureFields"></div>
+    <div class="ob-field"><label>Para cuando?</label><input type="date" id="ob4Deadline"></div>`;
+    setTimeout(()=>renderMeasureFields(),10);
   }
 }
 
-function pickChip(el, field) {
-  el.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  state[field] = el.textContent;
+function setMeasureType(type,el){
+  el.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');S.measureType=type;renderMeasureFields();
 }
 
-function saveDetails() {
-  if (state.arch === 'dejar') {
-    state.lastDay = document.getElementById('ob4LastDay')?.value || new Date().toISOString().split('T')[0];
-    state.monthlySpend = parseFloat(document.getElementById('ob4Spend')?.value) || 0;
-  } else if (state.arch === 'construir') {
-    state.frequency = document.getElementById('ob4Freq')?.value || 'Diario';
+function renderMeasureFields(){
+  const box=document.getElementById('ob4MeasureFields');if(!box)return;
+  if(S.measureType==='cantidad'){
+    box.innerHTML=`<div class="ob-field"><label>Que medimos?</label><select id="ob4Measure"><option value="paginas">Paginas</option><option value="horas">Horas</option><option value="euros">Euros</option><option value="km">Kilometros</option><option value="sesiones">Sesiones</option></select></div>
+    <div class="ob-field"><label>Cuanto quieres lograr?</label><input type="number" id="ob4Target" placeholder="Ej: 300"></div>`;
   } else {
-    state.goal = document.getElementById('ob4Goal')?.value || 'Mi meta';
-    state.measure = document.getElementById('ob4Measure')?.value || 'hitos';
-    state.target = parseInt(document.getElementById('ob4Target')?.value) || 100;
-    state.deadline = document.getElementById('ob4Deadline')?.value;
+    S.hitos=[];
+    box.innerHTML=`<div class="ob-field"><label>Cuales son tus pasos clave?</label>
+      <div id="hitosList"></div>
+      <div style="display:flex;gap:8px"><input type="text" id="hitoInput" placeholder="Ej: Tener MVP, Primer cliente..." style="flex:1"><button onclick="addHito()" style="padding:8px 16px;background:var(--teal);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:13px">+</button></div>
+    </div>`;
   }
-  obNext(5);
 }
 
-function selectComp(el, comp) {
-  document.querySelectorAll('.comp-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  state.companion = comp;
-  const btn = document.getElementById('btn-ob5');
-  btn.style.opacity='1'; btn.style.pointerEvents='auto';
+function addHito(){
+  const inp=document.getElementById('hitoInput');const v=inp.value.trim();if(!v)return;
+  S.hitos.push(v);inp.value='';renderHitosList();
+}
+function removeHito(i){S.hitos.splice(i,1);renderHitosList();}
+function renderHitosList(){
+  const box=document.getElementById('hitosList');
+  box.innerHTML=S.hitos.map((h,i)=>`<div class="hito-item"><div class="hnum">${i+1}</div><div class="htxt">${h}</div><button class="hdel" onclick="removeHito(${i})">&times;</button></div>`).join('');
 }
 
-function renderStep6() {
-  const c = COMPANIONS[state.companion];
-  document.getElementById('meetingGreeting').textContent = 'Hola, ' + state.name;
-  const msgs = { dejar:'El primer paso ya lo diste. Ahora caminamos juntos.', construir:'Cada dia es una oportunidad. Vamos a construir algo grande.', lograr:'Tu meta esta mas cerca de lo que crees. Empezamos.' };
-  document.getElementById('meetingMsg').textContent = msgs[state.arch];
-  document.getElementById('meetingSay').textContent = 'Soy '+c.name+'. Estare aqui cada dia.';
-  document.getElementById('meetingSvg').innerHTML = getCompanionSVG(state.companion, 180);
-  initOrbCanvas();
+function setDejarMode(mode,el){
+  S.dejarMode=mode;
+  el.parentElement.querySelectorAll('div').forEach(d=>{d.style.background='transparent';d.style.color='var(--earth)';});
+  el.style.background='var(--teal)';el.style.color='#fff';
+  renderDejarFields();
+}
+function renderDejarFields(){
+  const box=document.getElementById('dejarModeFields');if(!box)return;
+  const hm=habitMetrics[S.habit]||{metric:'euros',unit:'al mes',placeholder:'Euros al mes',label:'Cuanto gastabas? (opcional)',reducLabel:'Cuanto usabas antes?',reducUnit:'unidades'};
+  if(S.dejarMode==='total'){
+    box.innerHTML=`<div class="ob-field"><label>Cuando fue tu ultimo dia?</label><input type="date" id="ob4Last"></div>
+    <div class="ob-field"><label>${hm.label}</label><input type="number" id="ob4Spend" placeholder="${hm.placeholder}"></div>`;
+  } else {
+    box.innerHTML=`<div class="ob-field"><label>Cuanto quieres reducir?</label>
+      <div style="display:flex;align-items:center;gap:12px">
+        <input type="range" id="ob4Pct" min="10" max="90" step="10" value="${S.reducirPct}" oninput="document.getElementById('pctLabel').textContent=this.value+'%';S.reducirPct=parseInt(this.value)" style="flex:1;accent-color:var(--teal)">
+        <div id="pctLabel" style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal);min-width:48px;text-align:center">${S.reducirPct}%</div>
+      </div>
+    </div>
+    <div class="ob-field"><label>${hm.reducLabel}</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="number" id="ob4Before" placeholder="Antes" style="flex:1;text-align:center" step="0.5">
+        <span style="font-size:14px;color:var(--earth)">${hm.reducUnit}</span>
+      </div>
+      <div style="font-size:11px;color:var(--teal);margin-top:6px" id="reducTarget"></div>
+    </div>
+    <div class="ob-field"><label>Desde cuando empiezas?</label><input type="date" id="ob4Last"></div>`;
+    setTimeout(()=>{
+      const inp=document.getElementById('ob4Before');
+      if(inp)inp.addEventListener('input',()=>{
+        const v=parseFloat(inp.value)||0;
+        const target=Math.round(v*(1-S.reducirPct/100)*10)/10;
+        const tgt=document.getElementById('reducTarget');
+        if(tgt)tgt.textContent='Tu meta: pasar de '+v+' a '+target+' '+hm.reducUnit;
+      });
+    },20);
+  }
+}
+function pickChip(el,field){
+  el.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');S[field]=el.textContent;
+  const otroBox=document.getElementById('otro'+field.charAt(0).toUpperCase()+field.slice(1));
+  if(otroBox)otroBox.style.display='none';
+  // Re-render dejar fields when habit changes (to update metric labels)
+  if(field==='habit')renderDejarFields();
+}
+function pickOtro(el,field){
+  el.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  const boxId=field==='habit'?'otroHabit':'otroBuildHabit';
+  const box=document.getElementById(boxId);if(box){box.style.display='block';box.querySelector('input').focus();}
 }
 
-function startApp() {
-  state.startDate = new Date();
+function saveDetails(){
+  if(S.arch==='dejar'){
+    S.lastDay=document.getElementById('ob4Last')?.value||new Date().toISOString().split('T')[0];
+    S.startDate=new Date(S.lastDay);
+    const hm=habitMetrics[S.habit]||{metric:'euros',reducUnit:'unidades'};
+    S.habitMetric=hm.metric;S.habitUnit=hm.reducUnit||hm.unit;
+    if(S.dejarMode==='total'){
+      S.monthlySpend=parseFloat(document.getElementById('ob4Spend')?.value)||0;
+      S.reducirPct=100;
+    } else {
+      S.reducirPct=parseInt(document.getElementById('ob4Pct')?.value)||50;
+      S.habitBefore=parseFloat(document.getElementById('ob4Before')?.value)||0;
+      S.habitNow=Math.round(S.habitBefore*(1-S.reducirPct/100)*10)/10;
+      // Calculate equivalent monthly savings for the savings goals system
+      if(hm.metric==='euros')S.monthlySpend=S.habitBefore*(S.reducirPct/100);
+      else S.monthlySpend=0;
+    }
+  } else if(S.arch==='construir'){
+    S.freqNum=parseInt(document.getElementById('ob4FreqN')?.value)||3;
+    S.freqPeriod=document.getElementById('ob4FreqP')?.value||'semana';
+    S.frequency=S.freqNum+' veces por '+S.freqPeriod;
+  } else {
+    S.goal=document.getElementById('ob4Goal')?.value||'Mi meta';
+    if(S.measureType==='cantidad'){
+      S.measure=document.getElementById('ob4Measure')?.value||'unidades';
+      S.target=parseInt(document.getElementById('ob4Target')?.value)||100;
+    }
+    S.deadline=document.getElementById('ob4Deadline')?.value;
+  }
+  obGo(5);
+}
+
+function renderOb6(){
+  const c=C[S.companion];
+  document.getElementById('meetH').textContent='Hola, '+S.name;
+  const msgs={dejar:'El primer paso ya lo diste. Ahora caminamos juntos.',construir:'Cada dia es una oportunidad. Vamos a construir algo grande.',lograr:'Tu meta esta mas cerca de lo que crees. Empezamos.'};
+  document.getElementById('meetMsg').textContent=msgs[S.arch];
+  document.getElementById('meetSay').textContent='Soy '+c.name+'. Estare aqui cada dia.';
+  document.getElementById('meetSvg').innerHTML=svg(S.companion,180);
+  initOrb();
+}
+
+function startApp(){
+  if(!S.startDate)S.startDate=new Date();
+  S.metas=demoMetas.slice();
   document.getElementById('onboarding').classList.remove('active');
   document.getElementById('home').classList.add('active');
-  document.getElementById('tabBar').style.display = 'flex';
-  renderHome();
-  renderAllScreens();
+  document.getElementById('tabBar').style.display='flex';
+  renderAll();
 }
 
-// ==================== COMPANION SVGs ====================
-function getCompanionSVG(comp, size) {
-  const s = size || 72;
-  const h = s/2;
-  if (comp === 'luma') return `<svg width="${s}" height="${s}" viewBox="0 0 72 72"><defs><linearGradient id="clg1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#D4883A"/><stop offset="100%" stop-color="#8B7355"/></linearGradient></defs><ellipse cx="36" cy="40" rx="14" ry="18" fill="url(#clg1)"/><ellipse cx="36" cy="35" rx="9" ry="12" fill="#E8A84C" opacity=".5"/><ellipse cx="36" cy="28" rx="5" ry="8" fill="#F5D89A" opacity=".4"/><path d="M36 14 Q38 22 36 26 Q34 22 36 14" fill="#FFF3E0" opacity=".5"/></svg>`;
-  if (comp === 'cala') return `<svg width="${s}" height="${s}" viewBox="0 0 72 72"><defs><linearGradient id="clg2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4A90B8"/><stop offset="100%" stop-color="#2C6D8A"/></linearGradient></defs><ellipse cx="36" cy="42" rx="13" ry="16" fill="url(#clg2)"/><ellipse cx="36" cy="36" rx="8" ry="10" fill="#7CB8D4" opacity=".4"/><path d="M36 18 Q40 28 36 36 Q32 28 36 18" fill="#A8D8EA" opacity=".5"/></svg>`;
-  if (comp === 'sela') return `<svg width="${s}" height="${s}" viewBox="0 0 72 72"><defs><linearGradient id="clg3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8B7355"/><stop offset="100%" stop-color="#6B5A42"/></linearGradient></defs><ellipse cx="36" cy="44" rx="14" ry="12" fill="url(#clg3)"/><ellipse cx="36" cy="40" rx="10" ry="8" fill="#A89070" opacity=".5"/><path d="M36 24 Q38 30 37 34 L35 34 Q34 30 36 24" fill="#7A9A5A" opacity=".6"/><ellipse cx="38" cy="28" rx="4" ry="2" fill="#8CB86B" opacity=".4" transform="rotate(20 38 28)"/></svg>`;
-  return `<svg width="${s}" height="${s}" viewBox="0 0 72 72"><defs><linearGradient id="clg4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8A7F96"/><stop offset="100%" stop-color="#6B6280"/></linearGradient></defs><ellipse cx="36" cy="38" rx="18" ry="10" fill="url(#clg4)" opacity=".5"/><ellipse cx="30" cy="36" rx="12" ry="7" fill="#9B92AB" opacity=".4"/><ellipse cx="42" cy="34" rx="10" ry="6" fill="#ADA3BD" opacity=".35"/></svg>`;
-}
-
-function getFlameAtSize(stageIdx) {
-  // Growing flame SVGs for evolution timeline
-  const sizes = [[20,24],[26,30],[34,40],[40,46],[46,54],[52,58],[58,64],[66,72]];
-  const [w,h] = sizes[stageIdx];
-  const cx=w/2, cy=h*0.57, rx=w*0.35, ry=h*0.38;
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-    <defs><linearGradient id="efg${stageIdx}" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#D4883A"/><stop offset="100%" stop-color="#8B7355"/></linearGradient></defs>
-    <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#efg${stageIdx})"/>
-    <ellipse cx="${cx}" cy="${cy*.9}" rx="${rx*.65}" ry="${ry*.7}" fill="#E8A84C" opacity=".45"/>
-    <ellipse cx="${cx}" cy="${cy*.75}" rx="${rx*.4}" ry="${ry*.5}" fill="#F5D89A" opacity=".4"/>
-  </svg>`;
-}
-
-// ==================== NAVIGATION ====================
-function goTab(tab) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+// ===== NAVIGATION =====
+function goTab(tab){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(tab).classList.add('active');
-  document.querySelectorAll('.tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.tab === tab);
-  });
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));
+  renderAll();
 }
 
-// ==================== RENDER HOME ====================
-function renderHome() {
-  const c = COMPANIONS[state.companion] || COMPANIONS.luma;
-  const h = new Date().getHours();
-  const greet = h<12?'Buenos dias':h<18?'Buenas tardes':'Buenas noches';
-  document.getElementById('homeGreeting').textContent = greet+', '+state.name;
-  document.getElementById('homeCompanion').innerHTML = getCompanionSVG(state.companion, 120);
-  document.getElementById('homeCompName').textContent = c.name;
-  document.getElementById('homeCounter').textContent = state.streak;
+// ===== RENDER ALL =====
+function renderAll(){checkVitalityDecay();renderHome();renderMetas();renderDiario();renderJardin();renderEvo();}
 
-  // Daily task
-  const dailyTexts = { dejar:'Escribe una cosa que agradeces hoy', construir:'Hoy dedica 10 minutos a '+((state.buildHabit||'tu habito').toLowerCase()), lograr:'Avanza un poco en: '+(state.goal||'tu meta') };
-  document.getElementById('dailyText').textContent = dailyTexts[state.arch] || dailyTexts.dejar;
+// ===== VITALITY DECAY (ATTI SE CANSA) =====
+// Vitality naturally decays slightly each day if the user hasn't been active.
+// Also decreases more if user reports going over their reduction target.
+function checkVitalityDecay(){
+  const now=new Date();const today=now.toISOString().split('T')[0];
+  if(S._lastDecayCheck===today)return; // only once per day
+  S._lastDecayCheck=today;
+  // Decay: if no diary entry today and no meta completed today, small decay
+  const pendingMetas=S.metas.filter(m=>!m.done).length;
+  const totalMetas=S.metas.length;
+  if(totalMetas>0){
+    const doneRatio=S.metas.filter(m=>m.done).length/totalMetas;
+    if(doneRatio<0.3)S.vitality=Math.max(5,S.vitality-0.15); // not doing enough
+  }
+}
+// Report actual usage (for reducir mode) - can increase or decrease vitality
+function reportUsage(actual){
+  S.habitNow=actual;
+  const target=Math.round(S.habitBefore*(1-S.reducirPct/100)*10)/10;
+  if(actual<=target){
+    // On track or better
+    S.vitality=Math.min(100,S.vitality+0.20);
+    return {ok:true,msg:'Vas bien! '+actual+' vs meta de '+target};
+  } else if(actual<=S.habitBefore){
+    // Over target but still less than before
+    const overPct=Math.round((actual-target)/(S.habitBefore-target)*100);
+    S.vitality=Math.max(5,S.vitality-0.10);
+    return {ok:false,msg:'Te pasaste un poco. '+actual+' vs meta de '+target+'. Pero sigues mejor que antes.'};
+  } else {
+    // Worse than before
+    S.vitality=Math.max(5,S.vitality-0.30);
+    return {ok:false,msg:actual+' es mas que antes ('+S.habitBefore+'). '+C[S.companion].name+' lo siente.'};
+  }
+}
+
+// ===== HUMAN-TOUCH 1% TASKS =====
+const dailyTasks=[
+  'Trata a la persona del supermercado por su nombre',
+  'Sonrie a un desconocido y mantenle la mirada',
+  'Llama a alguien que no has llamado en un mes',
+  'Escribe un mensaje de agradecimiento a alguien',
+  'Pregunta "como estas de verdad?" a alguien cercano',
+  'Haz algo amable por alguien sin que lo sepa',
+  'Deja el movil 30 minutos y observa lo que te rodea',
+  'Camina 10 minutos sin destino y sin auriculares',
+  'Cocina algo sencillo con tus manos, sin prisa',
+  'Escribe 3 cosas buenas que te pasaron hoy',
+  'Dile a alguien algo que admires de el o ella',
+  'Ordena un rincon de tu casa que llevas ignorando',
+  'Respira 5 veces profundo antes de levantarte',
+  'Manda una foto bonita a alguien sin explicacion',
+  'Escucha una cancion entera sin hacer nada mas',
+  'Sientate en un banco y observa la vida pasar',
+  'Come una comida sin pantallas, saboreando cada bocado',
+  'Escribe una nota a mano para ti del futuro',
+  'Aprende el nombre de alguien nuevo hoy',
+  'Di que no a algo que no quieres hacer',
+  'Sal a ver el atardecer o el amanecer',
+  'Pide ayuda en algo que normalmente harias solo',
+  'Regala un cumplido sincero a un extranno',
+  'Haz tu cama con intencion, como un ritual',
+  'Bebe un vaso de agua despacio, sintiendo cada trago',
+  'Abraza a alguien 10 segundos mas de lo normal',
+  'Deja propina extra o un detalle inesperado',
+  'Recoge algo del suelo que no es tuyo',
+  'Escucha a alguien sin interrumpir ni aconsejar',
+  'Haz una cosa que llevas posponiendo, aunque sea pequena'
+];
+function getDailyTask(){
+  const dayIdx=Math.floor(Date.now()/86400000)%dailyTasks.length;
+  return dailyTasks[dayIdx];
+}
+
+// ===== HOME =====
+function renderHome(){
+  const c=C[S.companion]||C.luma;const days=getDays();
+  const h=new Date().getHours();const greet=h<12?'Buenos dias':h<18?'Buenas tardes':'Buenas noches';
+  document.getElementById('hGreet').textContent=greet+', '+S.name;
+  document.getElementById('hComp').innerHTML=svg(S.companion,120);
+  document.getElementById('hCName').textContent=c.name;
+  document.getElementById('hCount').textContent=days;
+
+  const dailyText=getDailyTask();
 
   // Card 1
-  if (state.arch === 'dejar') {
-    const days = state.streak;
-    const saved = Math.round((state.monthlySpend/30)*days);
-    document.getElementById('card1Label').textContent = 'En tu bolsillo';
-    document.getElementById('card1Value').textContent = saved+'€';
-    document.getElementById('card1Sub').textContent = 'ahorrado en '+days+' dias';
-  } else if (state.arch === 'construir') {
-    document.getElementById('card1Label').textContent = 'Tu racha';
-    document.getElementById('card1Value').textContent = state.streak+' dias';
-    document.getElementById('card1Sub').textContent = 'seguidos sin fallar';
+  let c1l,c1v,c1s;
+  if(S.arch==='dejar'){
+    const saved=getSaved();
+    if(S.dejarMode==='reducir'&&S.habitMetric==='horas'){
+      const target=Math.round(S.habitBefore*(1-S.reducirPct/100)*10)/10;
+      c1l='Tu meta';c1v=target+'h/dia';c1s='de '+S.habitBefore+'h antes (-'+S.reducirPct+'%)';
+    } else if(S.monthlySpend){
+      const nextPremio=S.premios.find(p=>p.type==='ahorro'&&p.value>saved&&!p.canjeado);
+      c1l='En tu bolsillo';c1v=saved+'&euro;';c1s=nextPremio?'Proximo: '+nextPremio.name+' ('+nextPremio.value+'&euro;)':'ahorrado en '+days+' dias';
+    } else {
+      c1l='Dias libres';c1v=days;c1s=S.dejarMode==='reducir'?'reduciendo '+S.reducirPct+'%':'sin '+(S.habit||'eso').toLowerCase();
+    }
+  } else if(S.arch==='construir'){
+    c1l='Tu racha';c1v=days+' dias';c1s='seguidos sin fallar';
   } else {
-    document.getElementById('card1Label').textContent = 'Tu progreso';
-    document.getElementById('card1Value').textContent = state.currentProgress+'/'+(state.target||100);
-    document.getElementById('card1Sub').textContent = state.measure||'completado';
+    if(S.measureType==='hitos'){
+      const done=S.hitos.filter((_,i)=>i<2).length;// demo: 2 done
+      c1l='Tu progreso';c1v=done+'/'+S.hitos.length;c1s='hitos completados';
+    } else {
+      c1l='Tu progreso';c1v=S.currentProgress+'/'+(S.target||100);c1s=S.measure||'completado';
+    }
   }
+  const vState=vit()>=80?'Radiante':vit()>=60?'Activo':vit()>=40?'Tranquilo':'Apagado';
 
-  // Card 2 - always vitality
-  document.getElementById('card2Label').textContent = 'Vitalidad de '+c.name;
-  document.getElementById('card2Value').textContent = state.vitality+'%';
-  const vState = state.vitality>=80?'Radiante':state.vitality>=60?'Activo':state.vitality>=40?'Tranquilo':state.vitality>=20?'Apagado':'Dormido';
-  const vColor = state.vitality>=80?'var(--teal)':state.vitality>=60?'var(--amber)':state.vitality>=40?'var(--earth)':'var(--air)';
-  document.getElementById('card2State').textContent = vState;
-  document.getElementById('card2State').style.color = vColor;
-  document.getElementById('card2Bar').style.width = state.vitality+'%';
+  const pending=S.metas.filter(m=>!m.done).length;
+  const nextMeta=S.metas.find(m=>!m.done);
+  const msg=getReactiveMsg();
 
-  // Message
-  const msgs = ['Hoy es un buen dia para dar un paso mas.','Cada paso cuenta. Sigue adelante.','Llevas '+state.streak+' dias. Eso habla de ti.','No mires atras. Mira lo lejos que has llegado.'];
-  document.getElementById('homeMsg').textContent = msgs[Math.floor(Math.random()*msgs.length)];
-  document.getElementById('homeSign').textContent = '-- '+c.name;
+  document.getElementById('hBody').innerHTML=`
+    <div class="card daily-card">
+      <div class="daily-label">Tu 1% de hoy</div>
+      <div class="daily-text">${dailyText}</div>
+      <div style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="doDailyTask(this)">
+        <div id="dailyC" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;transition:all .3s">${checkSvg}</div>
+        <span style="font-size:13px;color:var(--dark)">Completar</span>
+      </div>
+      <div id="dailyVN" style="font-size:11px;color:var(--amber);margin-left:34px;margin-top:4px;opacity:0;transition:opacity .3s">+0.15 vitalidad</div>
+    </div>
+    <div class="card-pair">
+      <div class="card"><div class="cl">${c1l}</div><div class="cv">${c1v}</div><div class="cs">${c1s}</div></div>
+      <div class="card"><div class="cl">Vitalidad de ${c.name}</div><div class="cv">${vit()}%</div><div style="font-size:11px;color:${vit()>=60?'var(--teal)':'var(--amber)'};margin-top:2px">${vState}</div><div class="vbar"><div class="vbar-fill" style="width:${vit()}%"></div></div></div>
+    </div>
+    <div class="hub-grid">
+      <div class="card" onclick="goTab('metas')"><h3 class="serif">Metas</h3><div style="font-size:12px;color:var(--earth);margin-bottom:4px">${pending} pendientes</div>${nextMeta?`<div style="font-size:12px;color:var(--dark)">${nextMeta.action}</div>`:''}<div style="font-size:12px;color:var(--teal);font-weight:600;margin-top:6px">Ver todas ></div></div>
+      <div class="card" onclick="goTab('jardin')"><h3 class="serif">Jardin</h3><div style="font-size:12px;color:var(--earth);margin-bottom:4px">4 amigos</div><div style="font-size:12px;color:var(--teal);font-weight:600;margin-top:6px">Ver jardin ></div></div>
+    </div>
+    <div class="comp-msg"><div style="font-family:'DM Serif Display',serif;font-size:15px;font-style:italic;color:var(--dark);line-height:1.5">${msg}</div><div style="font-size:12px;color:var(--earth);text-align:right;margin-top:8px">-- ${c.name}</div></div>`;
 }
 
-// ==================== RENDER ALL ====================
-function renderAllScreens() {
-  const c = COMPANIONS[state.companion] || COMPANIONS.luma;
+function doDailyTask(el){
+  const circle=document.getElementById('dailyC');
+  if(circle.style.background)return;
+  circle.style.background='var(--teal)';
+  document.getElementById('dailyVN').style.opacity='1';
+  S.vitality=Math.min(100,S.vitality+0.15);
+}
 
-  // Diario insight
-  document.getElementById('insightLabel').textContent = c.name+' observa:';
+// ===== METAS =====
+let metaTab='objetivo';
+function switchMTab(tab,el){
+  document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');metaTab=tab;renderMetas();
+}
+
+function renderMetas(){
+  const box=document.getElementById('metasBody');const c=C[S.companion]||C.luma;const days=getDays();
+
+  if(metaTab==='objetivo'){
+    // Mi objetivo - the big archetype goal
+    let objH='<div class="stitle">Mi objetivo</div>';
+    if(S.arch==='dejar'){
+      const saved=getSaved();
+      objH+=`<div class="card" style="text-align:center;padding:24px">
+        <div style="font-size:13px;color:var(--earth);margin-bottom:4px">${S.dejarMode==='reducir'?'Estoy reduciendo':'Estoy dejando'}</div>
+        <div class="serif" style="font-size:24px;color:var(--dark);margin-bottom:16px">${S.habit||'Mi habito'}${S.dejarMode==='reducir'?' un '+S.reducirPct+'%':''}</div>
+        <div class="serif" style="font-size:48px;color:var(--teal)">${days}</div>
+        <div style="font-size:14px;color:var(--earth);margin-bottom:16px">${S.dejarMode==='reducir'?'dias comprometido':'dias libres'}</div>
+        ${S.dejarMode==='reducir'&&S.habitBefore?`<div style="padding:12px;background:rgba(26,95,107,.06);border-radius:12px;margin-bottom:8px">
+          <div style="font-size:12px;color:var(--earth);margin-bottom:4px">Meta de reduccion</div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--earth)">Antes: ${S.habitBefore} ${S.habitUnit||''}</span><span style="color:var(--teal);font-weight:600">Meta: ${Math.round(S.habitBefore*(1-S.reducirPct/100)*10)/10} ${S.habitUnit||''}</span></div>
+          <div class="pbar"><div class="pfill" style="width:${Math.min(100,Math.round(days/30*100))}%"></div></div>
+        </div>`:''}
+        ${saved>0?`<div style="padding:12px;background:rgba(212,136,58,.06);border-radius:12px"><div style="font-size:12px;color:var(--earth)">En tu bolsillo</div><div class="serif" style="font-size:28px;color:var(--amber)">${saved}&euro;</div></div>`:''}
+      </div>`;
+      // Premios moved to shared section below
+    } else if(S.arch==='construir'){
+      objH+=`<div class="card" style="text-align:center;padding:24px">
+        <div style="font-size:13px;color:var(--earth);margin-bottom:4px">Estoy construyendo</div>
+        <div class="serif" style="font-size:24px;color:var(--dark);margin-bottom:16px">${S.buildHabit||'Mi habito'}</div>
+        <div class="serif" style="font-size:48px;color:var(--teal)">${days}</div>
+        <div style="font-size:14px;color:var(--earth);margin-bottom:4px">dias de racha</div>
+        <div style="font-size:12px;color:var(--amber)">${S.frequency||'Mi frecuencia'}</div>
+      </div>`;
+    } else {
+      if(S.measureType==='hitos'){
+        const doneCount=Math.min(2,S.hitos.length);// demo
+        objH+=`<div class="card" style="padding:20px">
+          <div style="font-size:13px;color:var(--earth);margin-bottom:4px">Estoy logrando</div>
+          <div class="serif" style="font-size:22px;color:var(--dark);margin-bottom:16px">${S.goal||'Mi meta'}</div>
+          <div class="pbar" style="margin-bottom:12px"><div class="pfill" style="width:${S.hitos.length?(doneCount/S.hitos.length*100):0}%"></div></div>
+          <div style="font-size:13px;color:var(--earth);margin-bottom:12px">${doneCount} de ${S.hitos.length} hitos</div>`;
+        S.hitos.forEach((h,i)=>{
+          const done=i<doneCount;
+          objH+=`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;${i<S.hitos.length-1?'border-bottom:1px solid #f0ede8':''}">
+            <div style="width:20px;height:20px;border-radius:50%;${done?'background:var(--teal)':'border:2px solid #d9d3c8'};display:flex;align-items:center;justify-content:center">${done?checkSvg:''}</div>
+            <span style="font-size:13px;color:var(--dark);${done?'text-decoration:line-through;opacity:.5':''}">${h}</span>
+          </div>`;
+        });
+        objH+=`</div>`;
+      } else {
+        const pct=S.target?Math.round(S.currentProgress/S.target*100):0;
+        objH+=`<div class="card" style="text-align:center;padding:24px">
+          <div style="font-size:13px;color:var(--earth);margin-bottom:4px">Estoy logrando</div>
+          <div class="serif" style="font-size:22px;color:var(--dark);margin-bottom:16px">${S.goal||'Mi meta'}</div>
+          <div class="serif" style="font-size:48px;color:var(--teal)">${S.currentProgress}</div>
+          <div style="font-size:14px;color:var(--earth);margin-bottom:12px">de ${S.target} ${S.measure}</div>
+          <div class="pbar"><div class="pfill" style="width:${pct}%"></div></div>
+        </div>`;
+      }
+    }
+    // === PREMIOS (shared across all archetypes) ===
+    if(S.premios.length){
+      const saved=getSaved();const doneMetas=S.metas.filter(m=>m.done).length;
+      const activePremios=S.premios.filter(p=>!p.canjeado);
+      if(activePremios.length){
+        objH+=`<div class="stitle" style="margin-top:16px">Mis premios</div>`;
+        S.premios.forEach((p,i)=>{
+          if(p.canjeado)return;
+          let current=0,target=p.value,unit='',label='';
+          if(p.type==='ahorro'){current=saved;unit='&euro;';label=target+'&euro; ahorrados';}
+          else if(p.type==='dias'){current=days;unit=' dias';label=target+' dias';}
+          else if(p.type==='metas'){current=doneMetas;unit=' metas';label=target+' metas completadas';}
+          const pct=target>0?Math.min(100,Math.round(current/target*100)):0;
+          const reached=current>=target;
+          objH+=`<div class="card" style="display:flex;align-items:center;gap:12px;${reached?'background:linear-gradient(135deg,rgba(212,136,58,.08),rgba(26,95,107,.04))':''}">
+            <div style="font-size:24px;width:40px;text-align:center">${p.icon}</div>
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:600;color:var(--dark)">${p.name}</div>
+              <div style="font-size:11px;color:var(--earth);margin-bottom:4px">${label}</div>
+              <div class="pbar"><div class="pfill" style="width:${pct}%;${reached?'background:linear-gradient(90deg,var(--amber),#C0884A)':''}"></div></div>
+              <div style="font-size:11px;color:${reached?'var(--amber)':'var(--earth)'};margin-top:2px">${reached?'Desbloqueado!':current+'/'+target+unit+' ('+pct+'%)'}</div>
+            </div>
+            ${reached?`<button onclick="canjeaPremio(${i})" style="padding:8px 16px;background:linear-gradient(135deg,var(--amber),#C0884A);color:#fff;border:none;border-radius:10px;font-family:'DM Sans';font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">Canjear</button>`:''}
+          </div>`;
+        });
+      }
+      // Canjeados
+      const canjeados=S.premios.filter(p=>p.canjeado);
+      if(canjeados.length){
+        objH+=`<div style="font-size:11px;color:var(--earth);margin-top:8px">${canjeados.length} premio${canjeados.length>1?'s':''} canjeado${canjeados.length>1?'s':''}</div>`;
+      }
+      objH+=`<button onclick="openAddPremio()" style="width:100%;padding:12px;border:2px dashed #d9d3c8;border-radius:12px;background:transparent;font-family:'DM Sans';font-size:13px;color:var(--earth);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--earth)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Agregar premio
+      </button>`;
+    }
+    objH+=`<div class="comp-msg" style="margin-top:12px"><div style="font-family:'DM Serif Display',serif;font-size:14px;font-style:italic;color:var(--dark);line-height:1.5">${getReactiveMsg()}</div><div style="font-size:12px;color:var(--earth);text-align:right;margin-top:8px">-- ${c.name}</div></div>`;
+    box.innerHTML=objH;
+    return;
+  }
+
+  if(metaTab==='shared'){
+    box.innerHTML=`<div style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(26,95,107,.06);border-radius:12px;cursor:pointer;margin-bottom:12px" onclick="openInvite()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg>
+      <div style="flex:1;font-size:13px;color:var(--teal);font-weight:500">Invitar amigo</div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="card" style="display:flex;gap:12px;align-items:flex-start">
+        ${svg('cala',36)}
+        <div style="flex:1"><div style="font-size:14px;font-weight:600;color:var(--dark)">Correr juntos</div><div style="font-size:11px;color:var(--earth)">Con Ana (Cala)</div>
+        <div class="pbar" style="margin:6px 0"><div class="pfill" style="width:60%"></div></div>
+        <span style="font-size:11px;color:var(--earth)">3/5</span></div>
+      </div>`;
+    return;
+  }
+
+  // Personal metas (reward-first) with time filter
+  const filters=[{id:'semana',label:'Semana'},{id:'mes',label:'Mes'},{id:'anno',label:'Anno'}];
+  let h=`<div style="display:flex;gap:0;margin-bottom:16px;background:#f0ede8;border-radius:12px;padding:3px">`;
+  filters.forEach(f=>{
+    h+=`<div onclick="setMetaFilter('${f.id}')" style="flex:1;text-align:center;padding:8px 0;font-size:13px;font-weight:${metaFilter===f.id?'600':'400'};color:${metaFilter===f.id?'var(--dark)':'var(--earth)'};background:${metaFilter===f.id?'#fff':'transparent'};border-radius:10px;cursor:pointer;transition:all .2s;${metaFilter===f.id?'box-shadow:0 1px 4px rgba(0,0,0,.08)':''}">${f.label}</div>`;
+  });
+  h+=`</div>`;
+
+  const filtered=S.metas.filter(m=>m.timeframe===metaFilter);
+  const countByTime={semana:S.metas.filter(m=>m.timeframe==='semana').length,mes:S.metas.filter(m=>m.timeframe==='mes').length,anno:S.metas.filter(m=>m.timeframe==='anno').length};
+
+  if(filtered.length===0){
+    const emptyMsgs={semana:'No tienes metas semanales. Crea una con el boton +',mes:'No tienes metas mensuales. Ideales para retos mas grandes.',anno:'No tienes metas anuales. Perfectas para suennos ambiciosos.'};
+    h+=`<div style="text-align:center;padding:32px 16px;color:var(--earth)"><div style="font-size:13px;margin-bottom:8px">${emptyMsgs[metaFilter]}</div></div>`;
+  } else {
+    filtered.forEach((m,fi)=>{
+      const realIdx=S.metas.indexOf(m);
+      h+=`<div class="meta-item">
+        <div class="meta-check${m.done?' done':''}" onclick="toggleMeta(${realIdx})">${checkSvg}</div>
+        <div style="flex:1">
+          <div style="font-size:14px;color:var(--dark);font-weight:500;${m.done?'text-decoration:line-through;opacity:.5':''}">${m.action}</div>
+          <div style="font-size:11px;color:var(--earth);margin-top:3px">${m.freq}</div>
+          <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+            <span class="badge badge-t">${m.reward}</span>
+            <span class="badge badge-a">+0.08</span>
+          </div>
+          <div style="font-size:10px;color:var(--earth);margin-top:4px;font-style:italic">${m.rewardDetail}</div>
+        </div>
+      </div>`;
+    });
+  }
+
+  // Show summary of other timeframes
+  const otherFrames=filters.filter(f=>f.id!==metaFilter);
+  const otherCount=otherFrames.reduce((sum,f)=>sum+countByTime[f.id],0);
+  if(otherCount>0){
+    h+=`<div style="text-align:center;padding:8px;font-size:11px;color:var(--earth);margin-top:4px">`;
+    otherFrames.forEach(f=>{if(countByTime[f.id])h+=`${countByTime[f.id]} meta${countByTime[f.id]>1?'s':''} en ${f.label.toLowerCase()} &middot; `;});
+    h=h.replace(/ &middot; $/,'');
+    h+=`</div>`;
+  }
+
+  const earned=S.metas.filter(m=>m.done);
+  if(earned.length){
+    h+=`<div class="stitle" style="margin-top:20px">Recompensas desbloqueadas</div>`;
+    earned.forEach(m=>{h+=`<div class="card" style="background:linear-gradient(135deg,rgba(212,136,58,.08),rgba(26,95,107,.04));display:flex;align-items:center;gap:12px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <div style="flex:1"><div style="font-size:14px;font-weight:600;color:var(--dark)">${m.reward}</div><div style="font-size:11px;color:var(--earth)">${m.rewardDetail}</div></div>
+      <button onclick="showCanjear('${m.reward}','${m.rewardDetail}')" style="padding:6px 14px;background:var(--amber);color:#fff;border:none;border-radius:10px;font-family:'DM Sans';font-size:11px;font-weight:600;cursor:pointer">Canjear</button>
+    </div>`;});
+  }
+  box.innerHTML=h;
+}
+
+function setMetaFilter(f){metaFilter=f;renderMetas();}
+
+function toggleMeta(i){
+  if(S.metas[i].done)return;
+  const m=S.metas[i];
+  m.done=true;S.vitality=Math.min(100,S.vitality+0.08);
+  // Show celebration
+  showCelebration(m);
+  renderMetas();
+}
+
+// ===== CELEBRATIONS =====
+function showCelebration(meta){
+  const c=C[S.companion]||C.luma;
+  const celebMsgs=[c.name+' celebra contigo!','Lo lograste. '+c.name+' brilla.','Bien merecido. '+c.name+' lo sabe.'];
+  document.getElementById('celebContent').innerHTML=`<div class="celeb-anim">
+    <div class="celeb-star">&#10024;</div>
+    <div class="serif" style="font-size:22px;color:var(--dark);margin-bottom:8px">Recompensa desbloqueada</div>
+    <div style="font-size:18px;font-weight:600;color:var(--amber);margin-bottom:4px">${meta.reward}</div>
+    <div style="font-size:13px;color:var(--earth);margin-bottom:12px">${meta.rewardDetail}</div>
+    <div style="font-size:13px;color:var(--dark);font-style:italic;margin-bottom:4px">${celebMsgs[Math.floor(Math.random()*celebMsgs.length)]}</div>
+    <div style="font-size:11px;color:var(--amber)">+0.08 vitalidad</div>
+    <button class="canjear-btn" onclick="closeCeleb()">Cerrar</button>
+  </div>`;
+  document.getElementById('celebOv').classList.add('active');
+}
+function closeCeleb(){document.getElementById('celebOv').classList.remove('active');}
+
+function showCanjear(reward,detail){
+  document.getElementById('celebContent').innerHTML=`<div class="celeb-anim">
+    <div class="celeb-star">&#127881;</div>
+    <div class="serif" style="font-size:22px;color:var(--dark);margin-bottom:8px">${reward}</div>
+    <div style="font-size:14px;color:var(--earth);margin-bottom:16px">${detail}</div>
+    <div style="font-size:13px;color:var(--dark)">Disfruta tu recompensa. Te la ganaste.</div>
+    <button class="canjear-btn" onclick="closeCeleb()">Listo, lo disfrute</button>
+  </div>`;
+  document.getElementById('celebOv').classList.add('active');
+}
+
+// ===== PREMIOS =====
+function canjeaPremio(i){
+  const p=S.premios[i];const c=C[S.companion]||C.luma;
+  p.canjeado=true;
+  const typeLabels={ahorro:'Ahorraste lo suficiente.',dias:'Llegaste a los dias.',metas:'Completaste tus metas.'};
+  document.getElementById('celebContent').innerHTML=`<div class="celeb-anim">
+    <div style="font-size:48px;margin-bottom:12px">${p.icon}</div>
+    <div class="serif" style="font-size:22px;color:var(--dark);margin-bottom:8px">Premio desbloqueado!</div>
+    <div style="font-size:18px;font-weight:600;color:var(--amber);margin-bottom:4px">${p.name}</div>
+    <div style="font-size:14px;color:var(--earth);margin-bottom:12px">${typeLabels[p.type]||''}</div>
+    <div style="font-size:13px;color:var(--dark);font-style:italic;margin-bottom:4px">${c.name} dice: Te lo mereces. Cada dia de esfuerzo te trajo hasta aqui.</div>
+    <button class="canjear-btn" onclick="closeCeleb();renderMetas()">Disfrutarlo!</button>
+  </div>`;
+  document.getElementById('celebOv').classList.add('active');
+}
+let newPremioType='dias';
+function openAddPremio(){
+  newPremioType='dias';
+  document.getElementById('celebContent').innerHTML=`<div class="celeb-anim" style="text-align:left">
+    <div class="serif" style="font-size:20px;color:var(--dark);margin-bottom:16px;text-align:center">Nuevo premio</div>
+    <div style="margin-bottom:12px">
+      <label style="font-size:12px;font-weight:600;color:var(--dark);display:block;margin-bottom:6px">Que quieres?</label>
+      <input type="text" id="newPName" placeholder="Ej: Viaje, Cena, Compra..." style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:10px;font-family:'DM Sans';font-size:14px;color:var(--dark)">
+    </div>
+    <div style="margin-bottom:12px">
+      <label style="font-size:12px;font-weight:600;color:var(--dark);display:block;margin-bottom:6px">Cuando lo desbloqueo?</label>
+      <div style="display:flex;gap:0;background:#f0ede8;border-radius:10px;padding:3px">
+        <div onclick="setPremioType('dias',this)" style="flex:1;text-align:center;padding:8px;font-size:12px;font-weight:600;background:var(--teal);color:#fff;border-radius:8px;cursor:pointer" id="ptDias">Al llegar a X dias</div>
+        <div onclick="setPremioType('metas',this)" style="flex:1;text-align:center;padding:8px;font-size:12px;font-weight:400;background:transparent;color:var(--earth);border-radius:8px;cursor:pointer" id="ptMetas">Al completar X metas</div>
+        ${S.monthlySpend?`<div onclick="setPremioType('ahorro',this)" style="flex:1;text-align:center;padding:8px;font-size:12px;font-weight:400;background:transparent;color:var(--earth);border-radius:8px;cursor:pointer" id="ptAhorro">Al ahorrar X&euro;</div>`:''}
+      </div>
+    </div>
+    <div style="margin-bottom:16px">
+      <label style="font-size:12px;font-weight:600;color:var(--dark);display:block;margin-bottom:6px" id="newPValLabel">Cuantos dias?</label>
+      <input type="number" id="newPVal" placeholder="Ej: 30" style="width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:10px;font-family:'DM Sans';font-size:14px;color:var(--dark)">
+    </div>
+    <button class="btn" onclick="addPremio()">Agregar premio</button>
+    <button onclick="closeCeleb()" style="width:100%;padding:10px;background:none;border:none;color:var(--earth);font-size:13px;cursor:pointer;margin-top:6px">Cancelar</button>
+  </div>`;
+  document.getElementById('celebOv').classList.add('active');
+}
+function setPremioType(t,el){
+  newPremioType=t;
+  ['ptDias','ptMetas','ptAhorro'].forEach(id=>{const e=document.getElementById(id);if(e){e.style.background='transparent';e.style.color='var(--earth)';e.style.fontWeight='400';}});
+  el.style.background='var(--teal)';el.style.color='#fff';el.style.fontWeight='600';
+  const labels={dias:'Cuantos dias?',metas:'Cuantas metas completadas?',ahorro:'Cuantos euros?'};
+  document.getElementById('newPValLabel').textContent=labels[t]||'Valor';
+}
+function addPremio(){
+  const name=document.getElementById('newPName')?.value.trim();
+  const val=parseInt(document.getElementById('newPVal')?.value);
+  if(!name||!val)return;
+  const icons=['🎯','🎁','🏖','🎵','📚','🎮','💆','🍕','🏔','🎨'];
+  S.premios.push({name:name,type:newPremioType,value:val,icon:icons[Math.floor(Math.random()*icons.length)],canjeado:false});
+  closeCeleb();renderMetas();
+}
+
+// ===== REACTIVE COMPANION MESSAGES =====
+function getReactiveMsg(){
+  const c=C[S.companion]||C.luma;const days=getDays();
+  const doneMetas=S.metas.filter(m=>m.done).length;
+  if(doneMetas>=3)return'Hoy fuiste imparable. '+c.name+' no podria estar mas orgulloso.';
+  if(doneMetas>=1)return'Vas por buen camino. Cada paso que das, '+c.name+' lo siente.';
+  if(days>1)return'Llevas '+days+' dias. Eso habla de quien eres, no de lo que haces.';
+  return'Hoy es un nuevo comienzo. '+c.name+' esta aqui contigo.';
+}
+
+// ===== INVITE OVERLAY =====
+function openInvite(){
+  const code='ATTI-'+Math.random().toString(36).substr(2,4).toUpperCase();
+  document.getElementById('inviteBody').innerHTML=`
+    <div style="text-align:center;padding-top:20px">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" style="margin-bottom:16px"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg>
+      <h2 class="serif" style="font-size:22px;color:var(--dark);margin-bottom:8px">Invita a un amigo</h2>
+      <p style="font-size:13px;color:var(--earth);margin-bottom:20px">Comparte este codigo para que se una a tu jardin</p>
+      <div class="invite-code">${code}</div>
+      <button class="btn" onclick="copyCode('${code}',this)" style="margin-bottom:12px">Copiar codigo</button>
+      <p style="font-size:11px;color:var(--earth)">Tu amigo lo ingresa al crear su cuenta</p>
+    </div>`;
+  document.getElementById('inviteOv').classList.add('active');
+}
+function closeInvite(){document.getElementById('inviteOv').classList.remove('active');}
+function copyCode(code,btn){btn.textContent='Copiado!';btn.style.background='var(--amber)';setTimeout(()=>{btn.textContent='Copiar codigo';btn.style.background='var(--teal)';},2000);}
+
+// ===== GARDEN OVERLAY =====
+let gardenStep=1;let newGarden={type:'',partner:''};
+function openGardenCreate(){
+  gardenStep=1;newGarden={type:'',partner:''};
+  document.getElementById('gardenOv').classList.add('active');renderGardenStep();
+}
+function closeGarden(){document.getElementById('gardenOv').classList.remove('active');}
+function renderGardenStep(){
+  const box=document.getElementById('gardenBody');
+  if(gardenStep===1){
+    const types=[{id:'familia',icon:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>',t:'Jardin Familia',p:'Actividades para reconectar con tu familia'},
+      {id:'pareja',icon:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>',t:'Jardin Pareja',p:'Momentos para fortalecer tu relacion'},
+      {id:'amigos',icon:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>',t:'Jardin Amigos',p:'Retos y actividades con tus amigos'},
+      {id:'otro',icon:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--earth)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>',t:'Otro',p:'Crea tu propio tipo de jardin'}];
+    let h='<h2 class="serif" style="font-size:22px;color:var(--dark);margin-bottom:8px">Que tipo de jardin?</h2><p style="font-size:13px;color:var(--earth);margin-bottom:20px">Cada jardin genera actividades semanales</p>';
+    types.forEach(t=>{h+=`<div class="garden-type${newGarden.type===t.id?' sel':''}" onclick="selGardenType('${t.id}',this)">${t.icon}<div><div style="font-weight:600;font-size:14px;color:var(--dark)">${t.t}</div><div style="font-size:12px;color:var(--earth)">${t.p}</div></div></div>`;});
+    h+=`<div style="flex:1"></div><button class="btn" onclick="gardenNext()" id="btnGarden1" style="${newGarden.type?'':'opacity:.4;pointer-events:none'}">Siguiente</button>`;
+    box.innerHTML=h;
+  } else {
+    let extraField='';
+    if(newGarden.type==='otro')extraField=`<div class="ob-field"><label>Como se llama tu jardin?</label><input type="text" id="gardenCustomName" placeholder="Ej: Jardin Terapeuta, Grupo Recovery..."></div>`;
+    box.innerHTML=`<h2 class="serif" style="font-size:22px;color:var(--dark);margin-bottom:8px">Con quien?</h2>
+    <p style="font-size:13px;color:var(--earth);margin-bottom:20px">Nombre de tu compannero de jardin</p>
+    ${extraField}
+    <div class="ob-field"><label>Nombre del compannero</label><input type="text" id="gardenPartner" placeholder="Ej: Lucas, Maria, Ana..."></div>
+    <div style="flex:1"></div>
+    <button class="btn" onclick="gardenNext()">Crear jardin</button>
+    <button onclick="gardenStep=1;renderGardenStep()" style="width:100%;padding:12px;background:none;border:none;color:var(--earth);font-size:13px;cursor:pointer;margin-top:8px">Volver</button>`;
+  }
+}
+function selGardenType(type,el){
+  document.querySelectorAll('.garden-type').forEach(g=>g.classList.remove('sel'));
+  el.classList.add('sel');newGarden.type=type;
+  const b=document.getElementById('btnGarden1');if(b){b.style.opacity='1';b.style.pointerEvents='auto';}
+}
+function gardenNext(){
+  if(gardenStep===1){if(!newGarden.type)return;gardenStep=2;renderGardenStep();}
+  else{newGarden.partner=document.getElementById('gardenPartner')?.value.trim()||'Amigo';closeGarden();alert('Jardin creado con '+newGarden.partner+'! Las actividades semanales empiezan ahora.');renderJardin();}
+}
+
+// ===== CREATE META (reward-first) =====
+let createStep=1;
+let newMeta={reward:'',rewardDetail:'',action:'',freq:'',freqNum:2,freqPeriod:'semana',timeframe:'semana'};
+
+function openCreateMeta(){
+  createStep=1;newMeta={reward:'',rewardDetail:'',action:'',freq:'',freqNum:2,freqPeriod:'semana',timeframe:metaFilter||'semana'};
+  document.getElementById('createOv').classList.add('active');renderCreateStep();
+}
+function closeCreateMeta(){document.getElementById('createOv').classList.remove('active');}
+
+function renderCreateStep(){
+  const box=document.getElementById('createBody');
+  if(createStep===1){
+    box.innerHTML=`<h2 class="serif" style="font-size:22px;color:var(--dark);margin-bottom:8px">Que te quieres ganar?</h2>
+    <p style="font-size:13px;color:var(--earth);margin-bottom:20px">Primero lo importante: tu recompensa</p>
+    <div class="ob-field"><label>Tu recompensa</label><input type="text" id="crReward" placeholder="Ej: Cafe especial, Brunch, Cine..." value="${newMeta.reward}"></div>
+    <div class="ob-field"><label>Donde o cual? (se especifico)</label><input type="text" id="crDetail" placeholder="Ej: Hola Coffee en Malasanna" value="${newMeta.rewardDetail}"></div>
+    <div style="flex:1"></div>
+    <button class="btn" onclick="crNext()">Siguiente</button>`;
+  } else if(createStep===2){
+    box.innerHTML=`<h2 class="serif" style="font-size:22px;color:var(--dark);margin-bottom:8px">Que haces para merecerlo?</h2>
+    <p style="font-size:13px;color:var(--earth);margin-bottom:20px">Define la accion que desbloquea tu recompensa</p>
+    <div class="ob-field"><label>La accion</label><input type="text" id="crAction" placeholder="Ej: Correr 30 min, Leer 20 paginas..." value="${newMeta.action}"></div>
+    <div class="ob-field"><label>Con que frecuencia?</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="number" id="crFreqN" value="${newMeta.freqNum}" min="1" max="30" style="width:60px;text-align:center">
+        <span style="font-size:14px;color:var(--earth)">veces por</span>
+        <select id="crFreqP" style="flex:1"><option value="semana"${newMeta.freqPeriod==='semana'?' selected':''}>semana</option><option value="mes"${newMeta.freqPeriod==='mes'?' selected':''}>mes</option><option value="dia"${newMeta.freqPeriod==='dia'?' selected':''}>dia</option></select>
+      </div>
+    </div>
+    <div class="ob-field"><label>Horizonte temporal</label>
+      <div style="display:flex;gap:0;background:#f0ede8;border-radius:10px;padding:3px">
+        <div class="chip" onclick="selCrTf('semana',this)" style="flex:1;text-align:center;border:none;border-radius:8px;${newMeta.timeframe==='semana'?'background:var(--teal);color:#fff':'background:transparent'}">Semana</div>
+        <div class="chip" onclick="selCrTf('mes',this)" style="flex:1;text-align:center;border:none;border-radius:8px;${newMeta.timeframe==='mes'?'background:var(--teal);color:#fff':'background:transparent'}">Mes</div>
+        <div class="chip" onclick="selCrTf('anno',this)" style="flex:1;text-align:center;border:none;border-radius:8px;${newMeta.timeframe==='anno'?'background:var(--teal);color:#fff':'background:transparent'}">Anno</div>
+      </div>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn" onclick="crNext()">Crear meta</button>
+    <button onclick="createStep=1;renderCreateStep()" style="width:100%;padding:12px;background:none;border:none;color:var(--earth);font-size:13px;cursor:pointer;margin-top:8px">Volver</button>`;
+  }
+}
+
+function selCrTf(tf,el){
+  newMeta.timeframe=tf;
+  el.parentElement.querySelectorAll('.chip').forEach(c=>{c.style.background='transparent';c.style.color='var(--dark)';});
+  el.style.background='var(--teal)';el.style.color='#fff';
+}
+function crNext(){
+  if(createStep===1){
+    newMeta.reward=document.getElementById('crReward').value.trim();
+    newMeta.rewardDetail=document.getElementById('crDetail').value.trim();
+    if(!newMeta.reward)return;
+    createStep=2;renderCreateStep();
+  } else {
+    newMeta.action=document.getElementById('crAction').value.trim();
+    const n=parseInt(document.getElementById('crFreqN').value)||2;
+    const p=document.getElementById('crFreqP').value;
+    newMeta.freq=n+' veces por '+p;
+    if(!newMeta.action)return;
+    S.metas.push({...newMeta,done:false});
+    metaFilter=newMeta.timeframe;
+    closeCreateMeta();renderMetas();
+  }
+}
+
+// ===== DIARIO =====
+const dailyQuestions=[
+  'Que fue lo mas dificil de hoy?','Quien te hizo sentir bien?','Que habrias hecho diferente?',
+  'Que aprendiste hoy?','De que te sientes orgulloso?','Que te preocupa ahora mismo?',
+  'Que momento de hoy quieres recordar?','Que necesitas soltar?','Que te dio energia hoy?',
+  'Si pudieras hablar con tu yo de hace un mes, que le dirias?','Que te acerca a tu meta?',
+  'Que te aleja de quien quieres ser?','Que silencio necesitas?','A quien necesitas agradecer?'
+];
+function getDailyQuestion(){
+  const c=C[S.companion]||C.luma;
+  const dayIdx=Math.floor(Date.now()/86400000)%dailyQuestions.length;
+  return {q:dailyQuestions[dayIdx],from:c.name};
+}
+const contextTags=['Trabajo','Familia','Salud','Social','Personal','Logro','Reto'];
+let selectedTags=[];
+
+function renderDiario(){
+  const c=C[S.companion]||C.luma;
+  document.getElementById('diarioSub').textContent='12 dias escribiendo';
+  const moods=[
+    {id:'muy_mal',label:'Muy mal',clr:'var(--terra)',r:4},
+    {id:'mal',label:'Mal',clr:'var(--terra)',r:6},
+    {id:'normal',label:'Normal',clr:'var(--earth)',r:8},
+    {id:'bien',label:'Bien',clr:'var(--teal)',r:9},
+    {id:'muy_bien',label:'Muy bien',clr:'var(--teal)',r:10}
+  ];
+  let moodH='';moods.forEach(m=>{
+    moodH+=`<div class="mood-opt" onclick="selMood(this,'${m.id}')"><div class="mwrap">${moodSvg(m.id,m.clr,m.r)}</div><div style="font-size:10px;color:#999;text-align:center">${m.label}</div></div>`;
+  });
+
+  // Daily question
+  const dq=getDailyQuestion();
+
+  // Tags
+  let tagH='';contextTags.forEach(t=>{
+    tagH+=`<div class="chip${selectedTags.includes(t)?' sel':''}" onclick="toggleDiaryTag('${t}',this)" style="font-size:11px;padding:5px 12px">${t}</div>`;
+  });
+
+  const entries=[
+    {d:'12/2',mood:'bien',txt:'Hoy fue un buen dia. Sali a caminar...',tags:['Personal','Salud']},
+    {d:'11/2',mood:'normal',txt:'Dia tranquilo. Trabaje bastante...',tags:['Trabajo']},
+    {d:'10/2',mood:'mal',txt:'Noche dificil. Tuve ganas de recaer...',tags:['Reto','Familia']}
+  ];
+  let entH='';entries.forEach(e=>{
+    const dc=e.mood==='bien'?'var(--teal)':e.mood==='normal'?'var(--amber)':'var(--terra)';
+    let tagBadges=e.tags.map(t=>`<span class="badge badge-w" style="font-size:9px">${t}</span>`).join('');
+    entH+=`<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f0ede8"><div class="serif" style="font-size:12px;color:var(--dark);min-width:36px">${e.d}</div><div style="width:10px;height:10px;border-radius:50%;background:${dc};flex-shrink:0;margin-top:3px"></div><div style="flex:1"><div style="font-size:12px;color:#888;line-height:1.3;margin-bottom:4px">${e.txt}</div><div style="display:flex;gap:4px;flex-wrap:wrap">${tagBadges}</div></div></div>`;
+  });
 
   // Calendar
-  renderCalendar();
-
-  // Retos/Jardin
-  renderFriends();
-
-  // My comp card
-  document.getElementById('myCompCard').innerHTML = `
-    ${getCompanionSVG(state.companion,48)}
-    <div style="flex:1;">
-      <div style="font-weight:600;color:var(--dark);">${c.name}</div>
-      <div style="font-size:12px;color:var(--earth);">Etapa ${state.stage}: ${c.stages[state.stage-1]}</div>
-      <div class="vitality-bar" style="margin-top:4px;"><div class="vitality-bar-fill" style="width:${state.vitality}%;"></div></div>
-    </div>`;
-
-  // Ranking name
-  document.getElementById('rankName').textContent = state.name || 'Tu';
-
-  // Evolucion
-  document.getElementById('evoAvatar').innerHTML = getCompanionSVG(state.companion, 56);
-  document.getElementById('evoName').textContent = c.name;
-  document.getElementById('evoStageLabel').textContent = 'Etapa '+state.stage;
-  document.getElementById('evoStageName').textContent = c.stages[state.stage-1];
-  if (state.stage < 8) {
-    const nextDays = STAGE_DAYS[state.stage] - state.streak;
-    document.getElementById('evoNext').textContent = 'Siguiente: '+c.stages[state.stage]+' en '+Math.max(0,nextDays)+' dias';
-  } else {
-    document.getElementById('evoNext').textContent = 'Etapa maxima alcanzada';
+  const moodDays={1:'bien',3:'bien',5:'normal',7:'bien',8:'mal',9:'bien',10:'mal',11:'normal',12:'bien'};
+  let calH='';for(let d=1;d<=28;d++){
+    const mood=moodDays[d];const dc=mood==='bien'?'var(--teal)':mood==='normal'?'var(--amber)':mood==='mal'?'var(--terra)':'';
+    calH+=`<div style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:11px;color:#bbb;border-radius:6px;background:#f9f8f5;position:relative">${d}${dc?`<div style="width:6px;height:6px;border-radius:50%;background:${dc};position:absolute;bottom:3px"></div>`:''}</div>`;
   }
-  document.getElementById('evoStreak').textContent = state.streak;
-  document.getElementById('evoMax').textContent = state.maxStreak;
-  document.getElementById('evoVit').textContent = state.vitality;
-  document.getElementById('evoVitBar').style.width = state.vitality+'%';
 
-  // Evo visual timeline
-  document.getElementById('evoVisualTitle').textContent = c.name+' crece contigo.';
-  document.getElementById('evoVisualSub').textContent = 'De '+c.stages[0].toLowerCase()+' a '+c.stages[7].toLowerCase()+'. Cada dia '+c.verb+'.';
-  let tlHTML = '';
-  for (let i=0; i<8; i++) {
-    const cls = i<state.stage-1?'completed':i===state.stage-1?'current':'future';
-    tlHTML += `<div class="evo-st ${cls}">${getFlameAtSize(i)}<div class="edot"></div><div class="ename">${c.stages[i]}</div><div class="eday">${STAGE_LABELS[i]}</div></div>`;
-  }
-  document.getElementById('evoTimeline').innerHTML = tlHTML;
+  // Companion insight based on tags
+  const insights={
+    Trabajo:'Esta semana has escrito mucho sobre trabajo. Recuerda que descansar tambien es avanzar.',
+    Familia:'Tu familia aparece mucho en tus entradas. Parece que son importantes para ti.',
+    Salud:'Has mencionado tu salud varias veces. Cuidarte es el primer paso.',
+    Reto:'Has enfrentado retos esta semana. Cada uno te hace mas fuerte.'
+  };
+  const insightKey=entries.flatMap(e=>e.tags).sort((a,b)=>entries.flatMap(e=>e.tags).filter(t=>t===b).length-entries.flatMap(e=>e.tags).filter(t=>t===a).length)[0];
+  const insightText=insights[insightKey]||'Sigue escribiendo. Cada entrada es un paso hacia conocerte mejor.';
 
-  // Evo message
-  document.getElementById('evoMsg').textContent = state.streak+' dias juntos. Mira todo lo que hemos recorrido.';
-  document.getElementById('evoSign').textContent = '-- '+c.name;
+  document.getElementById('diarioBody').innerHTML=`
+    <div class="card" style="border-left:4px solid var(--amber);margin-bottom:12px">
+      <div style="font-size:10px;color:var(--amber);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:6px">${c.name} te pregunta:</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:16px;color:var(--dark);font-style:italic;line-height:1.4">${dq.q}</div>
+    </div>
+    <div class="card">
+      <div class="stitle" style="margin-bottom:14px">Como te sientes hoy?</div>
+      <div class="mood-row">${moodH}</div>
+      <textarea class="di" placeholder="Escribe lo que quieras..." oninput="this.parentElement.querySelector('.charct').textContent=this.value.length+'/500'" maxlength="500"></textarea>
+      <div class="charct" style="text-align:right;font-size:11px;color:#999;margin-top:4px">0/500</div>
+      <div style="margin-top:12px">
+        <div style="font-size:12px;font-weight:600;color:var(--dark);margin-bottom:8px">Contexto (opcional)</div>
+        <div class="chip-group">${tagH}</div>
+      </div>
+      <div style="margin-top:16px;padding:16px;background:rgba(212,136,58,.04);border-radius:12px">
+        <div style="font-size:12px;font-weight:600;color:var(--amber);margin-bottom:8px">Gratitud rapida</div>
+        <div style="font-size:12px;color:var(--earth);margin-bottom:8px">3 cosas por las que estas agradecido hoy</div>
+        <input type="text" id="grat1" placeholder="1." style="width:100%;padding:8px 12px;border:1px solid #e8e5dc;border-radius:8px;font-family:'DM Sans';font-size:13px;margin-bottom:6px;background:#fff;color:var(--dark)">
+        <input type="text" id="grat2" placeholder="2." style="width:100%;padding:8px 12px;border:1px solid #e8e5dc;border-radius:8px;font-family:'DM Sans';font-size:13px;margin-bottom:6px;background:#fff;color:var(--dark)">
+        <input type="text" id="grat3" placeholder="3." style="width:100%;padding:8px 12px;border:1px solid #e8e5dc;border-radius:8px;font-family:'DM Sans';font-size:13px;background:#fff;color:var(--dark)">
+      </div>
+      <button class="btn" style="margin-top:14px" onclick="saveDiary()">Guardar entrada</button>
+      <div style="text-align:center;margin-top:6px;font-size:11px;color:var(--amber)">+0.10 vitalidad</div>
+    </div>
+    <div class="card" style="border-left:4px solid var(--teal)">
+      <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:6px">${c.name} observa:</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:14px;font-style:italic;color:var(--dark);line-height:1.5">${insightText}</div>
+    </div>
+    <div class="stitle">Entradas recientes</div>${entH}
+    <div class="stitle" style="margin-top:16px">Febrero 2026</div>
+    <div class="card"><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:8px">${calH}</div><div style="font-size:12px;color:var(--earth)">8 de 13 dias con entrada</div></div>`;
 }
 
-function renderFriends() {
-  const friends = [
-    {name:'Maria', comp:'cala', vit:85, state:'Radiante'},
-    {name:'Carlos', comp:'sela', vit:62, state:'Activo'},
-    {name:'Ana', comp:'luma', vit:45, state:'Tranquilo'},
-    {name:'Pablo', comp:'ala', vit:78, state:'Activo'}
-  ];
-  let html = '';
-  friends.forEach(f => {
-    const fc = COMPANIONS[f.comp];
-    html += `<div class="friend-card">
-      ${getCompanionSVG(f.comp,40)}
-      <div class="f-name">${f.name}</div>
-      <div class="f-comp">${fc.name}</div>
-      <div class="f-state" style="color:${fc.color};">${f.state}</div>
-      <div class="f-bar"><div class="f-bar-fill" style="width:${f.vit}%;background:${fc.color};"></div></div>
-    </div>`;
-  });
-  html += `<div class="invite-card" onclick="alert('Invitar amigo: ATTI-7K2M')">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    <div style="font-size:12px;color:#bbb;">Invitar amigo</div>
+function selMood(el,mood){document.querySelectorAll('.mood-opt').forEach(m=>m.classList.remove('sel'));el.classList.add('sel');S._selectedMood=mood;}
+function toggleDiaryTag(tag,el){
+  const idx=selectedTags.indexOf(tag);
+  if(idx>-1){selectedTags.splice(idx,1);el.classList.remove('sel');}
+  else{selectedTags.push(tag);el.classList.add('sel');}
+}
+// ===== COMPANION DIARY RESPONSE ENGINE =====
+const diaryR={
+  struggle:[
+    {kw:['ganas','tentacion','tentado','recaer','recai','dificil','duro','costado','aguante','resisti'],
+     r:['{name} te mira con calma. "Sentir ganas no es fallar. Es la prueba de que estas eligiendo."',
+        '"Lo dificil no es no sentirlo," dice {name}. "Es sentirlo y quedarte de pie. Hoy lo hiciste."',
+        '{name} brilla un poco mas. "Cada vez que dices no, yo me hago mas fuerte. Gracias."']},
+    {kw:['solo','sola','soledad','aislado','nadie','incomprendido'],
+     r:['"No estas solo," dice {name} bajito. "Yo estoy aqui. Y eso no cambia."',
+        '{name} se acerca. "A veces la soledad grita. Pero escribirlo aqui ya es un acto de valentia."']},
+    {kw:['miedo','ansiedad','angustia','panico','nervios','preocup'],
+     r:['{name} respira contigo. "El miedo dice que algo te importa. Eso no es debilidad."',
+        '"No tienes que resolver todo hoy," dice {name}. "Solo hoy. Solo este momento."']},
+    {kw:['llore','llorar','triste','tristeza','dolor','mal','fatal','horrible'],
+     r:['{name} no dice nada por un momento. Luego: "Llorar es limpiar. No te lo guardes."',
+        '"Hoy duele," dice {name}. "Pero el dolor pasa. Tu y yo seguimos aqui."',
+        '{name} se queda cerca. "No voy a decirte que todo esta bien. Pero no estas solo en esto."']}
+  ],
+  victory:[
+    {kw:['logre','consegui','pude','lo hice','orgulloso','orgullo','bien','genial','increible','feliz'],
+     r:['{name} brilla. "Eso que sientes ahora? Guardalo. Es combustible para los dias grises."',
+        '"Lo hiciste," dice {name}. "Sabia que podias."',
+        '{name} celebra contigo en silencio. "No necesitas que nadie mas lo vea. Tu y yo sabemos."']},
+    {kw:['racha','dias','semana','mes','tiempo','llevo'],
+     r:['"{days} dias," cuenta {name}. "Cada uno es una decision. Y tu la tomas cada manana."',
+        '{name} mira atras contigo. "Mira todo lo que has caminado. No lo olvides cuando duela."']}
+  ],
+  people:[
+    {kw:['mama','papa','madre','padre','familia','hijo','hija','hermano','hermana'],
+     r:['{name} escucha. "La familia nos marca. Para bien o para mal, son parte de quien eres."',
+        '"Las personas que mas nos importan," dice {name}, "son las que mas pueden movernos."']},
+    {kw:['amigo','amiga','pareja','novio','novia','relacion'],
+     r:['{name} asiente. "Las personas correctas no te piden que seas alguien que no eres."',
+        '"Rodearte de buena gente," dice {name}, "es la decision mas invisible y mas poderosa."']}
+  ],
+  reflection:[
+    {kw:['pienso','pensar','reflexion','cuenta','aprendi','entendi','realice'],
+     r:['{name} te observa. "Darte cuenta ya es la mitad del camino. La otra mitad es actuar."',
+        '"Pensar asi requiere coraje," dice {name}. "La mayoria no se atreve a mirarse de frente."']},
+    {kw:['cambiar','cambio','diferente','nuevo','empezar','avanzar'],
+     r:['{name} asiente despacio. "El cambio no es un momento. Es cada dia eligiendo de nuevo."',
+        '"No tienes que ser otra persona," dice {name}. "Solo una version mas honesta de quien ya eres."']}
+  ]
+};
+const diaryFallback=[
+  '{name} guarda tus palabras. "Escribir es ordenar el ruido. Bien hecho."',
+  '"Gracias por compartirlo conmigo," dice {name}. "Cada entrada te acerca a conocerte."',
+  '{name} asiente. "No todo tiene que tener sentido hoy. A veces basta con sacarlo."',
+  '"Hoy escribiste," dice {name}. "Eso ya es cuidarte. Manana seguimos."'
+];
+function getCompanionResponse(text,mood){
+  const c=C[S.companion]||C.luma;const days=getDays();const low=text.toLowerCase();
+  const cats=['struggle','victory','people','reflection'];
+  for(const cat of cats){
+    for(const group of diaryR[cat]){
+      if(group.kw.some(k=>low.includes(k))){
+        const r=group.r[Math.floor(Math.random()*group.r.length)];
+        return r.replace(/\{name\}/g,c.name).replace(/\{habit\}/g,S.habit||'eso').replace(/\{days\}/g,days);
+      }
+    }
+  }
+  if(mood==='muy_mal'||mood==='mal')
+    return c.name+' se queda cerca en silencio. "No hace falta que estes bien. Solo que estes aqui."';
+  if(mood==='muy_bien')
+    return c.name+' lo siente. "Dias como hoy son los que hacen que valga la pena."';
+  return diaryFallback[Math.floor(Math.random()*diaryFallback.length)].replace(/\{name\}/g,c.name);
+}
+
+function saveDiary(){
+  if(!S._selectedMood)return alert('Selecciona como te sientes');
+  const ta=document.querySelector('.di');if(!ta||!ta.value.trim())return alert('Escribe algo');
+  const text=ta.value.trim();const mood=S._selectedMood;
+  S.vitality=Math.min(100,S.vitality+0.10);
+  const response=getCompanionResponse(text,mood);
+  const c=C[S.companion]||C.luma;
+  // Show companion response overlay
+  document.getElementById('celebContent').innerHTML=`<div class="celeb-anim" style="text-align:left">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <div style="width:48px;height:48px;flex-shrink:0">${svg(S.companion,48)}</div>
+      <div><div class="serif" style="font-size:16px;color:var(--dark)">${c.name}</div><div style="font-size:11px;color:var(--earth)">respondio a tu entrada</div></div>
+    </div>
+    <div style="font-family:'DM Serif Display',serif;font-size:15px;color:var(--dark);line-height:1.6;font-style:italic;padding:16px;background:linear-gradient(135deg,rgba(26,95,107,.04),rgba(212,136,58,.04));border-radius:12px;margin-bottom:16px">${response}</div>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:12px;color:var(--amber)">+0.10 vitalidad</div>
+      <div style="font-size:11px;color:var(--earth)">Entrada guardada</div>
+    </div>
+    <button class="btn" onclick="closeCeleb()" style="margin-top:16px">Gracias, ${c.name}</button>
   </div>`;
-  document.getElementById('friendGrid').innerHTML = html;
+  document.getElementById('celebOv').classList.add('active');
+  // Reset form
+  ta.value='';
+  if(document.getElementById('grat1'))document.getElementById('grat1').value='';
+  if(document.getElementById('grat2'))document.getElementById('grat2').value='';
+  if(document.getElementById('grat3'))document.getElementById('grat3').value='';
+  document.querySelectorAll('.mood-opt').forEach(m=>m.classList.remove('sel'));
+  selectedTags=[];S._selectedMood=null;
 }
 
-function renderCalendar() {
-  const grid = document.getElementById('calGrid');
-  if (!grid) return;
-  const moodDays = {1:'bien',3:'bien',5:'normal',7:'bien',8:'mal',9:'bien',10:'mal',11:'normal',12:'bien'};
-  let html = '';
-  for (let d=1; d<=28; d++) {
-    const mood = moodDays[d];
-    const dotColor = mood==='bien'?'var(--teal)':mood==='normal'?'var(--amber)':mood==='mal'?'var(--terracotta)':'';
-    html += `<div class="cal-day">${d}${dotColor?`<div class="cal-dot" style="background:${dotColor};"></div>`:''}</div>`;
+// ===== JARDIN (pure social) =====
+function renderJardin(){
+  const c=C[S.companion]||C.luma;
+  document.getElementById('jardinSub').textContent='Tu jardin tiene 4 amigos';
+  const friends=[
+    {name:'Maria',comp:'cala',vit:85,state:'Radiante'},
+    {name:'Carlos',comp:'sela',vit:62,state:'Activo'},
+    {name:'Ana',comp:'luma',vit:45,state:'Tranquilo'},
+    {name:'Pablo',comp:'ala',vit:78,state:'Activo'}
+  ];
+  let fH='';friends.forEach(f=>{
+    const fc=C[f.comp];
+    fH+=`<div class="friend-card">${svg(f.comp,40)}<div style="font-size:13px;font-weight:600;color:var(--dark);margin-top:6px">${f.name}</div><div style="font-size:10px;color:var(--earth)">${fc.name}</div><div style="font-size:11px;color:${fc.color};margin-top:4px">${f.state}</div><div style="width:100%;height:4px;background:#e8e5dc;border-radius:2px;margin-top:6px;overflow:hidden"><div style="height:100%;width:${f.vit}%;background:${fc.color};border-radius:2px"></div></div><button onclick="sendEnergy('${f.name}',this)" style="margin-top:8px;padding:6px 12px;background:rgba(26,95,107,.08);border:1px solid rgba(26,95,107,.15);border-radius:10px;font-family:'DM Sans';font-size:11px;color:var(--teal);cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:4px;transition:all .3s"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Enviar energia</button></div>`;
+  });
+  fH+=`<div class="invite-card" onclick="openInvite()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><div style="font-size:12px;color:#bbb">Invitar amigo</div></div>`;
+
+  const checkSmall='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+
+  document.getElementById('jardinBody').innerHTML=`
+    <div style="display:flex;align-items:center;gap:12px;padding:14px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:16px">
+      ${svg(S.companion,48)}
+      <div style="flex:1"><div style="font-weight:600;color:var(--dark)">${c.name}</div><div style="font-size:12px;color:var(--earth)">Etapa ${S.stage}: ${c.stages[S.stage-1]}</div><div class="vbar" style="margin-top:4px"><div class="vbar-fill" style="width:${vit()}%"></div></div></div>
+    </div>
+    <div class="stitle">Tu jardin</div>
+    <div class="friend-grid">${fH}</div>
+    <div class="stitle">Mis jardines</div>
+    <div class="card garden-card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        <div><div style="font-weight:600;font-size:13px;color:var(--dark)">Jardin Familia</div><div style="font-size:11px;color:var(--earth)">Con Lucas (hijo)</div></div>
+        <div style="font-size:10px;padding:2px 8px;background:rgba(212,136,58,.12);color:#C0884A;border-radius:8px;margin-left:auto">Semana 6</div>
+      </div>
+      <div class="garden-activity"><h4 class="serif" style="font-size:15px;color:var(--dark);margin-bottom:4px">Cocinar algo juntos</h4><p style="font-size:12px;color:var(--earth);line-height:1.4">Elijan una receta sencilla y preparenla juntos.</p></div>
+      <div class="week-dots">
+        <div class="wd wd-done">${checkSmall}</div><div class="wd wd-done">${checkSmall}</div><div class="wd wd-today" style="font-size:8px">X</div><div class="wd wd-future">J</div><div class="wd wd-future">V</div><div class="wd wd-future">S</div><div class="wd wd-future">D</div>
+      </div>
+      <div class="garden-q"><div style="font-size:10px;color:var(--teal);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px">Pregunta del dia para Lucas</div><div style="font-size:13px;color:var(--dark);font-style:italic">Cual es tu recuerdo favorito de nosotros?</div></div>
+    </div>
+    <button onclick="openGardenCreate()" style="width:100%;padding:14px;border:2px dashed #d9d3c8;border-radius:14px;background:transparent;font-family:'DM Sans';font-size:13px;color:var(--earth);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--earth)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Crear jardin
+    </button>`;
+}
+
+// ===== EVOLUCION =====
+function renderEvo(){
+  const c=C[S.companion]||C.luma;const days=getDays();
+  let nextTxt='';
+  if(S.stage<8){const nd=SDAYS[S.stage]-days;nextTxt='Siguiente: '+c.stages[S.stage]+' en '+Math.max(0,nd)+' dias';}
+  else nextTxt='Etapa maxima alcanzada';
+
+  document.getElementById('evoHead').innerHTML=`
+    <div class="evo-hero"><div class="evo-av">${svg(S.companion,56)}</div>
+      <div style="flex:1"><div class="serif" style="font-size:22px">${c.name}</div><div style="font-size:12px;opacity:.7;margin-bottom:2px">Etapa ${S.stage}</div><div style="font-size:16px;font-weight:600">${c.stages[S.stage-1]}</div><div style="font-size:11px;color:var(--amber);margin-top:2px">${nextTxt}</div></div>
+    </div>
+    <div class="streak-boxes">
+      <div class="streak-box"><div class="streak-num serif">${days}</div><div style="font-size:10px;color:var(--earth)">Racha actual</div></div>
+      <div class="streak-box"><div class="streak-num serif">${Math.max(days,S.maxStreak)}</div><div style="font-size:10px;color:var(--earth)">Racha maxima</div></div>
+      <div class="streak-box"><div class="streak-num serif">${vit()}</div><div style="font-size:10px;color:var(--earth)">Vitalidad</div><div class="vbar" style="margin-top:6px"><div class="vbar-fill" style="width:${vit()}%"></div></div></div>
+    </div>`;
+
+  // Timeline
+  let tlH='';for(let i=0;i<8;i++){
+    const cls=i<S.stage-1?'completed':i===S.stage-1?'current':'future';
+    tlH+=`<div class="evo-st ${cls}">${flameAt(i)}<div class="edot"></div><div class="en">${c.stages[i]}</div><div class="ed">${SLABELS[i]}</div></div>`;
   }
-  grid.innerHTML = html;
+
+  document.getElementById('evoBody').innerHTML=`
+    <div class="stitle">Tu progreso</div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num serif">87</div><div class="stat-lbl">tareas completadas</div><div class="stat-det">23 este mes</div></div>
+      <div class="stat-card"><div class="stat-num serif">34</div><div class="stat-lbl">entradas diario</div><div class="stat-det">12 este mes</div></div>
+      <div class="stat-card"><div class="stat-num serif">5</div><div class="stat-lbl">situaciones superadas</div><div class="stat-det">1 este mes</div></div>
+      <div class="stat-card"><div class="stat-num serif">${S.arch==='dejar'&&S.monthlySpend?getSaved()+'&euro;':S.arch==='dejar'?days+' dias':S.arch==='construir'?days+' dias':S.currentProgress+'/'+(S.target||100)}</div><div class="stat-lbl">${S.arch==='dejar'&&S.monthlySpend?'ahorrado':S.arch==='dejar'?(S.dejarMode==='reducir'?'reduciendo':'libres'):S.arch==='construir'?'de racha':'progreso'}</div><div class="stat-det">este mes</div></div>
+    </div>
+    <div class="stitle">Vitalidad - ultimas 4 semanas</div>
+    <div class="card"><svg width="100%" height="100" viewBox="0 0 300 100" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="ag" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="var(--teal)" stop-opacity=".3"/><stop offset="100%" stop-color="var(--teal)" stop-opacity=".05"/></linearGradient></defs><path d="M20 70L100 50L200 45L280 20L280 95L20 95Z" fill="url(#ag)"/><polyline points="20,70 100,50 200,45 280,20" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="20" cy="70" r="3" fill="var(--teal)"/><circle cx="100" cy="50" r="3" fill="var(--teal)"/><circle cx="200" cy="45" r="3" fill="var(--teal)"/><circle cx="280" cy="20" r="4" fill="var(--amber)" stroke="var(--teal)" stroke-width="2"/><text x="20" y="92" font-size="10" fill="var(--earth)" text-anchor="middle">Sem 1</text><text x="100" y="92" font-size="10" fill="var(--earth)" text-anchor="middle">Sem 2</text><text x="200" y="92" font-size="10" fill="var(--earth)" text-anchor="middle">Sem 3</text><text x="280" y="92" font-size="10" fill="var(--earth)" text-anchor="middle">Sem 4</text></svg></div>
+    <div class="evo-visual">
+      <h3 style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--dark);text-align:center;margin-bottom:2px">${c.name} crece contigo.</h3>
+      <div style="font-size:12px;color:var(--earth);text-align:center;font-style:italic;margin-bottom:16px">De ${c.stages[0].toLowerCase()} a ${c.stages[7].toLowerCase()}. Cada dia ${c.verb}.</div>
+      <div class="evo-scroll"><div class="evo-tl">${tlH}</div></div>
+      <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--earth);font-style:italic">8 etapas en 3 annos. Cada dia cuenta.</div>
+    </div>
+    <div class="stitle">Resumen de febrero</div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="font-size:12px;color:var(--earth);min-width:65px">Metas</div><div style="flex:1;height:6px;background:#e8e5dc;border-radius:3px;overflow:hidden"><div style="height:100%;width:77%;background:var(--teal);border-radius:3px"></div></div><div style="font-size:11px;color:var(--earth);min-width:32px;text-align:right">23/30</div></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="font-size:12px;color:var(--earth);min-width:65px">Diario</div><div style="flex:1;height:6px;background:#e8e5dc;border-radius:3px;overflow:hidden"><div style="height:100%;width:92%;background:var(--teal);border-radius:3px"></div></div><div style="font-size:11px;color:var(--earth);min-width:32px;text-align:right">12/13</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div style="font-size:12px;color:var(--earth);min-width:65px">1% diario</div><div style="flex:1;height:6px;background:#e8e5dc;border-radius:3px;overflow:hidden"><div style="height:100%;width:85%;background:var(--teal);border-radius:3px"></div></div><div style="font-size:11px;color:var(--earth);min-width:32px;text-align:right">11/13</div></div>
+    </div>
+    <div class="comp-msg"><div style="font-family:'DM Serif Display',serif;font-size:15px;font-style:italic;color:var(--dark);line-height:1.5">${days} dias juntos. Mira todo lo que hemos recorrido.</div><div style="font-size:12px;color:var(--earth);text-align:right;margin-top:8px">-- ${c.name}</div></div>`;
 }
 
-// ==================== INTERACTIONS ====================
-function completeDailyTask() {
-  const circle = document.getElementById('dailyCircle');
-  if (circle.classList.contains('done')) return;
-  circle.classList.add('done');
-  document.getElementById('dailyVitNote').classList.add('show');
-  state.vitality = Math.min(100, state.vitality + 0.15);
-  renderHome();
+// ===== SEND ENERGY =====
+function sendEnergy(name,btn){
+  btn.style.background='var(--teal)';btn.style.color='#fff';btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Enviado!';
+  btn.style.pointerEvents='none';
+  S.vitality=Math.min(100,S.vitality+0.05);
+  setTimeout(()=>{btn.style.background='rgba(26,95,107,.08)';btn.style.color='var(--teal)';btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Enviar energia';btn.style.pointerEvents='auto';},3000);
 }
 
-function toggleTask(el) {
-  if (el.classList.contains('done')) return;
-  el.classList.add('done');
-  el.closest('.task-item').style.opacity = '.5';
-  state.vitality = Math.min(100, state.vitality + 0.08);
+// ===== SITUACION =====
+function openSit(){document.getElementById('sitOv').classList.add('active');startBreath();}
+function closeSit(){document.getElementById('sitOv').classList.remove('active');clearInterval(S._breathInt);}
+function resolveSit(){S.vitality=Math.min(100,S.vitality+0.20);closeSit();alert('Situacion resuelta. +0.20 vitalidad.');}
+function startBreath(){
+  const tx=['Inspira lentamente...','Sosten...','Exhala lentamente...','Descansa...'];let i=0;
+  document.getElementById('breathTxt').textContent=tx[0];
+  S._breathInt=setInterval(()=>{i=(i+1)%4;document.getElementById('breathTxt').textContent=tx[i];},4000);
 }
 
-function selectMood(el, mood) {
-  document.querySelectorAll('.mood-opt').forEach(m => m.classList.remove('selected'));
-  el.classList.add('selected');
-  state._selectedMood = mood;
+// ===== PARTICLES =====
+function initP(){
+  const cv=document.getElementById('pCanvas');if(!cv)return;const ctx=cv.getContext('2d');
+  cv.width=390;cv.height=844;
+  const pts=Array.from({length:40},()=>({x:Math.random()*390,y:Math.random()*844,r:Math.random()*2+1,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,a:Math.random()*.5+.2}));
+  (function draw(){ctx.clearRect(0,0,390,844);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=390;if(p.x>390)p.x=0;if(p.y<0)p.y=844;if(p.y>844)p.y=0;p.a+=(Math.random()-.5)*.02;p.a=Math.max(.1,Math.min(.6,p.a));ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(212,136,58,${p.a})`;ctx.fill();});requestAnimationFrame(draw);})();
+}
+function initOrb(){
+  const cv=document.getElementById('orbCanvas');if(!cv)return;const ctx=cv.getContext('2d');
+  cv.width=390;cv.height=844;
+  const orbs=Array.from({length:25},()=>({a:Math.random()*Math.PI*2,d:80+Math.random()*60,s:.003+Math.random()*.004,r:2+Math.random()*3,o:Math.random()*.4+.2}));
+  (function draw(){ctx.clearRect(0,0,390,844);orbs.forEach(o=>{o.a+=o.s;const x=195+Math.cos(o.a)*o.d,y=380+Math.sin(o.a)*o.d*.6;ctx.beginPath();ctx.arc(x,y,o.r,0,Math.PI*2);ctx.fillStyle=`rgba(212,136,58,${o.o})`;ctx.fill();});requestAnimationFrame(draw);})();
 }
 
-function updateCharCount() {
-  const ta = document.querySelector('.diary-input');
-  document.getElementById('charCount').textContent = ta.value.length;
-}
-
-function saveDiary() {
-  if (!state._selectedMood) return alert('Selecciona como te sientes');
-  const ta = document.querySelector('.diary-input');
-  if (!ta.value.trim()) return alert('Escribe algo');
-  state.vitality = Math.min(100, state.vitality + 0.10);
-  ta.value = '';
-  document.getElementById('charCount').textContent = '0';
-  document.querySelectorAll('.mood-opt').forEach(m => m.classList.remove('selected'));
-  alert('Entrada guardada. +0.10 vitalidad');
-}
-
-function switchTaskTab(tab, el) {
-  document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('taskPersonal').style.display = tab==='personal'?'block':'none';
-  document.getElementById('taskShared').style.display = tab==='shared'?'block':'none';
-}
-
-function openSituacion() { document.getElementById('sitOverlay').classList.add('active'); startBreathing(); }
-function closeSituacion() { document.getElementById('sitOverlay').classList.remove('active'); clearInterval(state._breathInt); }
-function resolveSituacion() {
-  state.vitality = Math.min(100, state.vitality + 0.20);
-  closeSituacion();
-  alert('Situacion resuelta. +0.20 vitalidad. Bien hecho.');
-}
-
-function startBreathing() {
-  const texts = ['Inspira lentamente...','Sosten...','Exhala lentamente...','Descansa...'];
-  let i=0;
-  document.getElementById('breathText').textContent = texts[0];
-  state._breathInt = setInterval(() => { i=(i+1)%4; document.getElementById('breathText').textContent=texts[i]; }, 4000);
-}
-
-// ==================== PARTICLES ====================
-function initParticles() {
-  const canvas = document.getElementById('particleCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  canvas.width = 390; canvas.height = 844;
-  const particles = Array.from({length:40}, () => ({
-    x:Math.random()*390, y:Math.random()*844, r:Math.random()*2+1,
-    vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.3,
-    a:Math.random()*.5+.2
-  }));
-  function draw() {
-    ctx.clearRect(0,0,390,844);
-    particles.forEach(p => {
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0)p.x=390; if(p.x>390)p.x=0;
-      if(p.y<0)p.y=844; if(p.y>844)p.y=0;
-      p.a += (Math.random()-.5)*.02;
-      p.a = Math.max(.1,Math.min(.6,p.a));
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(212,136,58,${p.a})`; ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-}
-
-function initOrbCanvas() {
-  const canvas = document.getElementById('orbCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  canvas.width = 390; canvas.height = 844;
-  const c = COMPANIONS[state.companion];
-  const orbs = Array.from({length:25}, (_,i) => ({
-    angle:Math.random()*Math.PI*2, dist:80+Math.random()*60,
-    speed:.003+Math.random()*.004, r:2+Math.random()*3, a:Math.random()*.4+.2
-  }));
-  function draw() {
-    ctx.clearRect(0,0,390,844);
-    orbs.forEach(o => {
-      o.angle += o.speed;
-      const x = 195 + Math.cos(o.angle)*o.dist;
-      const y = 380 + Math.sin(o.angle)*o.dist*.6;
-      ctx.beginPath(); ctx.arc(x,y,o.r,0,Math.PI*2);
-      ctx.fillStyle = c.color.replace(')',`,${o.a})`).replace('rgb','rgba');
-      ctx.fillStyle = `rgba(212,136,58,${o.a})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-}
-
-// ==================== INIT ====================
-initParticles();
+// ===== INIT =====
+initP();
 </script>
 </body>
 </html>
